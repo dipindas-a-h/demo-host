@@ -1,0 +1,48 @@
+const mongoose = require('mongoose');
+
+const configDataSchema = new mongoose.Schema({
+    // PORT: { type: Number },
+    PRODUCTION: { type: Boolean },
+    // MONGODB_URL: { type: String },
+    JWT_SECRET: { type: String },
+    PAYPAL_CLIENT_ID: { type: String },
+    PAYPAL_CLIENT_SECRET: { type: String },
+    EMAIL: { type: String },
+    PASSWORD: { type: String },
+    CCAVENUE_MERCHANT_ID: { type: Number },
+    CCAVENUE_ACCESS_CODE: { type: String },
+    CCAVENUE_WORKING_KEY: { type: String },
+    RAZORPAY_KEY_ID: { type: String },
+    RAZORPAY_KEY_SECRET: { type: String },
+    SERVER_URL: { type: String },
+    REACT_APP_URL: { type: String },
+    B2B_WEB_URL: { type: String },
+    ADMIN_WEB_URL: { type: String },
+    BURJ_KHALIFA_USERNAME: { type: String },
+    BURJ_KHALIFA_PASSWORD: { type: String },
+    INSURANCE_SERVER_URL: { type: String },
+    WHATSAPP_SERVER_URL: { type: String },
+    CYGNET_USERNAME: { type: String },
+    CYGNET_PASSWORD: { type: String },
+    CYGNET_TENANT: { type: Number },
+    CYGNET_AGENCY: { type: Number },
+    HOTEL_BEDS_URL: { type: String },
+    HOTEL_BEDS_API_KEY: { type: String },
+    HOTEL_BEDS_SECRET: { type: String },
+    FLIGHT_SERVER_URL: { type: String },
+    COMPANY_NAME: { type: String },
+    COMPANY_REGISTRATION_NAME: { type: String },
+    COMPANY_LOGO: { type: String },
+    NODE_ENV: { type: String },
+    REDIS_REQUIRED: { type: Boolean },
+    LOGIN_AGENTCODE_REQUIRED: { type: Boolean },
+    NOTIFICATION_KEY: { type: String },
+    OTTILA_BASE_URL: { type: String },
+    OTTILA_USERNAME: { type: String },
+    OTTILA_PASSWORD: { type: String },
+    DATA_FEED: { type: Boolean },
+});
+
+const ConfigData = mongoose.model('ConfigData', configDataSchema);
+
+module.exports = ConfigData;

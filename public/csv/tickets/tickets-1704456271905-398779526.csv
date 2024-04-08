@@ -1,0 +1,8 @@
+ticketNo,lotNo,validity,validTill,details,ticketFor,cost
+11111111,A1,y,27-12-2024,some details,child,84.15
+888888,A2,y,27-12-2024,some details,child,84.15
+556454654,A1,y,27-12-2024,some details,child,84.15
+56546846,A1,y,27-12-2024,some details,child,84.15
+84655879874,A1,y,27-12-2024,some details,adult,84.15
+878989465456,A1,n,27-12-2024,,adult,84.15
+8489465465,A1,n,27-12-2024,,adult,84.15

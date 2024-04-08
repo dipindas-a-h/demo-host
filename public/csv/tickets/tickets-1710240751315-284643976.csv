@@ -1,0 +1,8 @@
+ticketNo,lotNo,validity,validTill,details,ticketFor,cost
+1000,A1,y,27-12-2026,some details,adult,84.15
+1001,A2,y,27-12-2026,some details,child,84.15
+1002,A1,y,27-12-2025,some details,child,84.15
+1003,A1,y,27-12-2025,some details,adult,84.15
+1004,A1,y,27-12-2025,some details,adult,84.15
+1005,A1,n,,,adult,84.15
+1006,A1,n,,,adult,84.15

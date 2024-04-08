@@ -1,0 +1,8 @@
+ticketNo,lotNo,validity,validTill,details,ticketFor,cost
+185,A1,y,27-12-2025,some details,adult,84.15
+898,A2,y,27-12-2025,some details,child,84.15
+678,A1,y,27-12-2025,some details,child,84.15
+7455,A1,y,27-12-2025,some details,adult,84.15
+1461,A1,y,27-12-2025,some details,adult,84.15
+794,A1,n,,,adult,84.15
+325,A1,n,,,adult,84.15
