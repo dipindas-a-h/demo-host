@@ -2,7 +2,7 @@ node_modules
 combined.log
 error.log
 
-.env.development
+# .env.development
 .env.production
 whatsappDb
 .wwebjs_auth

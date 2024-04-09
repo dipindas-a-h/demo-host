@@ -1,8 +1,12 @@
 const configRouter = require('express').Router();
 
 
-const {createInitialData} = require('../../controllers/initial/initialController')
+const {createInitialData,getInitialData,deleteInitialData,clearInitialData,updateInitialData} = require('../../controllers/initial/initialController')
 configRouter.post ('/',createInitialData)
+configRouter.get ('/',getInitialData)
+configRouter.delete ('/:id',deleteInitialData)
+
+
 // configRouter.post ('/',()=> console.log('datas'))
 
 

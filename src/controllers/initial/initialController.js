@@ -3,10 +3,8 @@ const ConfigData = require("../../models/initial/config.model");
 const { saveDataToFile, writeDataToFile, readDataFromFile } = require("./SaveDataFile");
 
 module.exports = {
-
-    createInitialData :async(req,res)=>{
-        try{
-            
+    createInitialData: async (req, res) => {
+        try {
             const {
                 PRODUCTION,
                 JWT_SECRET,
@@ -88,7 +86,7 @@ module.exports = {
                 OTTILA_BASE_URL,
                 OTTILA_USERNAME,
                 OTTILA_PASSWORD,
-                DATA_FEED ,
+                DATA_FEED,
                 // Add other fields as needed
             });
             // console.log('dataa',newConfigData)
@@ -96,18 +94,110 @@ module.exports = {
             // Save the new config data to the database
             await newConfigData.save();
             // saveDataToFile(newConfigData)
-            writeDataToFile(newConfigData)
+            writeDataToFile(newConfigData);
             res.status(201).json({
                 message: "Configuration Created",
-                config_id:newConfigData?._id,
-               config_data: newConfigData
+                config_id: newConfigData?._id,
+                config_data: newConfigData,
             });
 
-            let data = readDataFromFile()
-            
+            let data = readDataFromFile();
+
             console.log(data?.JWT_SECRET);
-        }catch(err){
-            sendErrorResponse(res,500,err)
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
         }
+    },
+
+    getInitialData: async (req, res) => {
+        try {
+            let data = await ConfigData.find({});
+            res.status(200).json({
+                data: data,
+            });
+            console.log('Get all initial data successful');
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
+        }
+    },
+
+    // Delete Initial Data
+    deleteInitialData: async (req, res) => {
+        try {
+            // Retrieve the config ID from request parameters
+            const configId = req.params.id;
+
+            // Check if the config ID is valid
+            if (!configId) {
+                return res.status(400).json({ message: 'Config ID is required' });
+            }
+
+            // Find the config data by ID and delete it
+            const deletedConfigData = await ConfigData.findByIdAndDelete(configId);
+
+            if (!deletedConfigData) {
+                return res.status(404).json({ message: 'Config data not found' });
+            }
+
+            // Delete successful
+            res.status(200).json({
+                message: 'Config data deleted successfully',
+                deleted_data: deletedConfigData,
+            });
+
+            console.log('Config data deleted successfully');
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
+        }
+    },
+    
+  // Clear All Initial Data
+  clearInitialData: async (req, res) => {
+    try {
+        // Delete all documents in the ConfigData collection
+        await ConfigData.deleteMany({});
+
+        res.status(200).json({
+            message: 'All initial data cleared successfully',
+        });
+
+        console.log('All initial data cleared successfully');
+    } catch (err) {
+        sendErrorResponse(res, 500, err);
     }
-}
+},
+
+// Update Initial Data
+updateInitialData: async (req, res) => {
+    try {
+        // Retrieve the config ID and updated data from request body
+        const { id } = req.params;
+        const updatedData = req.body;
+
+        // Check if the config ID is provided
+        if (!id) {
+            return res.status(400).json({ message: 'Config ID is required' });
+        }
+
+        // Update the config data in the database
+        const updatedConfigData = await ConfigData.findByIdAndUpdate(id, updatedData, { new: true });
+
+        if (!updatedConfigData) {
+            return res.status(404).json({ message: 'Config data not found' });
+        }
+
+        // Update successful
+        res.status(200).json({
+            message: 'Config data updated successfully',
+            updated_data: updatedConfigData,
+        });
+
+        console.log('Config data updated successfully');
+    } catch (err) {
+        sendErrorResponse(res, 500, err);
+    }
+},   
+    
+
+    
+};

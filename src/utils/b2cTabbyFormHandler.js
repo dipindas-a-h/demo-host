@@ -2,7 +2,7 @@ const axios = require("axios");
 const { isValidObjectId } = require("mongoose");
 const { User, AttractionActivity, AttractionOrder } = require("../models");
 const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
-const data = readDataFromFile()
+const data = readDataFromFile();
 
 const MERCHANT_CODE = data?.TABBY_MERCHANT_CODE;
 const PUBLIC_KEY = data?.TABBY_PUBLIC_KEY;
@@ -50,6 +50,7 @@ const b2cTabbyFormHandler = async ({
                         Number(totalAmount) /
                         Number(
                             selectedActivities[i].adultsCount + selectedActivities[i].childrenCount
+                            
                         )
                     )
                         .toFixed(2)
