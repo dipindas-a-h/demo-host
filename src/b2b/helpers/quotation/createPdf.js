@@ -1,4 +1,6 @@
 const puppeteer = require("puppeteer");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 
 const createPdf = async ({
     hotelQuotation,
@@ -103,7 +105,7 @@ const createPdf = async ({
     <br />
     <span>
         <span style="font-weight: 600;">
-             Greetings from ${process.env.COMPANY_NAME}!!!!
+             Greetings from ${data?.COMPANY_NAME}!!!!
         </span>
     </span>
     <br />
@@ -724,7 +726,7 @@ const createPdf = async ({
         //     executablePath: "/usr/bin/chromium-browser",
         //     args: ["--disable-gpu", "--disable-setuid-sandbox", "--no-sandbox", "--no-zygote"],
         // });
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [

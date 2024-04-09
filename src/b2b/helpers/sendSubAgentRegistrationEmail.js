@@ -1,5 +1,8 @@
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../helpers");
 const commonFooter = require("../../helpers/commonFooter");
+
+const data =  readDataFromFile()
 
 const sendSubAgentRegistrationEmail = async ({ agentCode, email, password, companyName }) => {
     try {
@@ -7,12 +10,12 @@ const sendSubAgentRegistrationEmail = async ({ agentCode, email, password, compa
 
         sendEmail(
             email,
-            `Welcome to ${process.env.COMPANY_NAME} B2B portal.`,
+            `Welcome to ${data?.COMPANY_NAME} B2B portal.`,
             `<div>
-                <span>We welcome ${companyName} to the ${process.env.COMPANY_NAME} Booking environment. Kindly use the following details to log in to our B2B Portal.</span>
+                <span>We welcome ${companyName} to the ${data?.COMPANY_NAME} Booking environment. Kindly use the following details to log in to our B2B Portal.</span>
                 <br />
                 <br />
-                <span>URL : ${process.env.B2B_WEB_URL}</span><br />
+                <span>URL : ${data?.B2B_WEB_URL}</span><br />
                 <span>Agent Code : ${agentCode}</span><br />
                 <span>Email : ${email}</span><br />
                 <span>Password : ${password}</span>

@@ -1,12 +1,14 @@
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
 const { B2cHomeSettings } = require("../models");
+const data = readDataFromFile()
 
 module.exports = async () => {
     const companyDetails = await B2cHomeSettings.findOne();
-    const companyLogo = process.env.COMPANY_LOGO;
-    const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+    const companyLogo = data?.COMPANY_LOGO;
+    const companyRegName = data?.COMPANY_REGISTRATION_NAME;
     return `
     <span>Best Regards</span> <br />
-    <span>${process.env.COMPANY_NAME}</span><br />
+    <span>${data?.COMPANY_NAME}</span><br />
     <span>Email :- ${companyDetails.email}</span> <br />
     <span>WhatsApp :-${companyDetails.phoneNumber1}</span> <br />
     <span>Customer Care :- ${companyDetails.phoneNumber2} </span> <br />

@@ -1,9 +1,13 @@
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
 const createInsurnaceSingleContractUtils = (insuranceContract, price, plan, discount, duration) => {
     try {
+        const configData  = readDataFromFile()
+
         const data = {
             businessLine: "travel",
             type: "SG",
-            agency: process.env.CYGNET_AGENCY,
+            agency: configData?.CYGNET_AGENCY,
             assistance_plan: plan,
             residence: "ARE",
             email: "excursion@travellerschoice.ae",

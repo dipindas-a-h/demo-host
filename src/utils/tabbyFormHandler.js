@@ -2,9 +2,12 @@ const { Reseller } = require("../b2b/models");
 const axios = require("axios");
 const { AttractionActivity } = require("../models");
 const { isValidObjectId } = require("mongoose");
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
+const data= readDataFromFile()
 
-const MERCHANT_CODE = process.env.TABBY_MERCHANT_CODE;
-const PUBLIC_KEY = process.env.TABBY_PUBLIC_KEY;
+
+const MERCHANT_CODE = data?.TABBY_MERCHANT_CODE;
+const PUBLIC_KEY = data?.TABBY_PUBLIC_KEY;
 const tabbyFormHandler = async ({
     res,
     totalAmount,
@@ -105,9 +108,9 @@ const tabbyFormHandler = async ({
             lang: "en",
             merchant_code: MERCHANT_CODE,
             merchant_urls: {
-                success: `${process.env.B2B_WEB_URL}/attractions/invoice/${orderId}`,
+                success: `${data?.B2B_WEB_URL}/attractions/invoice/${orderId}`,
                 cancel: "https://your-store/cancel",
-                failure: `${process.env.B2B_WEB_URL}/payment-decline`,
+                failure: `${data?.B2B_WEB_URL}/payment-decline`,
             },
         };
 

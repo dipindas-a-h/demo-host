@@ -1,5 +1,8 @@
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../helpers");
 const commonFooter = require("../../helpers/commonFooter");
+
+const data = readDataFromFile()
 
 const sendAttractionOrderEmail = async (reseller, attractionOrder) => {
     try {
@@ -40,7 +43,7 @@ const sendAttractionOrderEmail = async (reseller, attractionOrder) => {
                     .map((activity, index) => {
                         const link =
                             activity?.bookingType === "ticket"
-                                ? `<a href="${process.env.SERVER_URL}/attractions/orders/${attractionOrder?._id}/ticekt/${activity?._id}" download>View Ticket</a>`
+                                ? `<a href="${data?.SERVER_URL}/attractions/orders/${attractionOrder?._id}/ticekt/${activity?._id}" download>View Ticket</a>`
                                 : "";
                         // const attachments: [
                         //     {

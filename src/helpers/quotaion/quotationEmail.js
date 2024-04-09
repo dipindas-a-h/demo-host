@@ -1,6 +1,10 @@
 const sendEmail = require("../../helpers/sendEmail");
 const commonFooter = require("../../helpers/commonFooter");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 
+const data =readDataFromFile(
+    
+)
 const sentQuotationEmail = async ({
     path,
     reseller,
@@ -42,7 +46,7 @@ const sentQuotationEmail = async ({
             <br />
             <span>
                 <span style="font-weight: 600;">
-                     Greetings from ${process.env.COMPANY_NAME}!!!!
+                     Greetings from ${data?.COMPANY_NAME}!!!!
                 </span>
             </span>
             <br />

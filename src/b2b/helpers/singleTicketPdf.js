@@ -3,7 +3,10 @@ const bwipjs = require("bwip-js");
 const qrcode = require("qrcode");
 const QRious = require("qrious");
 const puppeteer = require("puppeteer");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 
+
+const data = readDataFromFile()
 const createSingleTicketPdf = async (activity, ticket) => {
     let combinedHtmlDoc = "";
     let options = {
@@ -15,7 +18,7 @@ const createSingleTicketPdf = async (activity, ticket) => {
     try {
         async function generatePdfAsBuffer(htmlContent, options) {
             // const browser = await puppeteer.launch();
-            let browser = process?.env?.PRODUCTION
+            let browser = data?.PRODUCTION
                 ? await puppeteer.launch({
                       executablePath: "/usr/bin/chromium-browser",
                       args: [
@@ -111,7 +114,7 @@ const createSingleTicketPdf = async (activity, ticket) => {
     <div style="width: 100%; background-color: primary; padding-top: 7px;" class="primary__section">
       <div style="display: grid; grid-template-columns: repeat(5, 1fr);" class="grid grid-cols-5 pt-7">
         <div style="grid-column: 1 / span 2;" class="col-span-2">
-          <img style="width: 200px; height: 100px;" src="${process.env.SERVER_URL}${
+          <img style="width: 200px; height: 100px;" src="${data?.SERVER_URL}${
             activity?.attraction?.logo
         }" alt="">
         </div>
@@ -180,7 +183,7 @@ const createSingleTicketPdf = async (activity, ticket) => {
                     : "";
             return `
           <div class="image-wrapper" style="${firstImage}${lastImage}">
-            <img src="${process.env.SERVER_URL}${link}" alt="images" style="position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; height:150px;" />
+            <img src="${data?.SERVER_URL}${link}" alt="images" style="position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; height:150px;" />
           </div>
         `;
         })

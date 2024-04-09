@@ -2,9 +2,10 @@ const { sendEmail } = require("../../../../helpers");
 const { formatDate } = require("../../../../utils");
 const { B2bHotelOrder, B2BHotelOrderPayment } = require("../../../models/hotel");
 const { AdminB2bAccess } = require("../../../../models");
-
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+const { readDataFromFile } = require("../../../../controllers/initial/SaveDataFile");
+const data  = readDataFromFile()
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
 
 const sendHotelReservationEmail = async ({ orderId }) => {
     try {
@@ -335,7 +336,7 @@ const sendHotelReservationEmail = async ({ orderId }) => {
         }
 
         let emails;
-        if (process.env.NODE_ENV === "production") {
+        if (data?.NODE_ENV === "production") {
             const salesRepresentatives = await AdminB2bAccess.findOne({
                 reseller:
                     hotelOrder?.reseller?.role === "reseller"

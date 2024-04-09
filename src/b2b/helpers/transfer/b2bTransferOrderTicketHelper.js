@@ -2,7 +2,8 @@
 const bwipjs = require("bwip-js");
 const qrcode = require("qrcode");
 const puppeteer = require("puppeteer");
-
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 const createTransferTicketPdf = async (order) => {
     let combinedHtmlDoc = "";
     let options = {
@@ -13,7 +14,7 @@ const createTransferTicketPdf = async (order) => {
     try {
         async function generatePdfAsBuffer(htmlContent, options) {
             // const browser = await puppeteer.launch();
-            let browser = process?.env?.PRODUCTION
+            let browser = data?.PRODUCTION
                 ? await puppeteer.launch({
                       executablePath: "/usr/bin/chromium-browser",
                       args: [
@@ -112,7 +113,7 @@ const createTransferTicketPdf = async (order) => {
                             align-tems: center;
                             object-fit: fit;
                         "
-                        src="${process.env.COMPANY_LOGO}"
+                        src="${data?.COMPANY_LOGO}"
                         alt=""
                     />
                 </div>

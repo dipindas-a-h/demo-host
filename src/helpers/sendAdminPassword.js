@@ -1,9 +1,13 @@
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
 const sendEmail = require("./sendEmail");
 
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
-const adminUrl = process.env.ADMIN_WEB_URL;
-const companyName = process.env.COMPANY_NAME;
+const data = readDataFromFile()
+
+
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
+const adminUrl = data?.ADMIN_WEB_URL;
+const companyName = data?.COMPANY_NAME;
 
 const sendAdminPassword = ({ name, email, password }) => {
     try {

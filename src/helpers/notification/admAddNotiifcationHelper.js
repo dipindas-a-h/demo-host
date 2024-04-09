@@ -1,4 +1,8 @@
 const { default: axios } = require("axios");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
+
+const data =readDataFromFile()
+
 
 module.exports = {
     createAppNotififcation: async ({ title, page, body, image, slug }) => {
@@ -11,7 +15,7 @@ module.exports = {
                     notification: {
                         title: title,
                         body: body,
-                        image: `${process.env.SERVER_URL}${image}`,
+                        image: `${data?.SERVER_URL}${image}`,
                     },
                     data: {
                         page: page,
@@ -20,7 +24,7 @@ module.exports = {
                 },
                 {
                     headers: {
-                        Authorization: `key=${process.env.NOTIFICATION_KEY}`,
+                        Authorization: `key=${data?.NOTIFICATION_KEY}`,
                         "Content-Type": "application/json",
                     },
                 }

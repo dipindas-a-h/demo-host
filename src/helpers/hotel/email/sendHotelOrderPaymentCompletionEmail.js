@@ -1,9 +1,11 @@
 const { sendEmail } = require("../../../helpers");
 const { formatDate } = require("../../../utils");
 const { B2bHotelOrder } = require("../../../b2b/models/hotel");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
 
 const sendHotelOrderPaymentCompletionEmail = async ({ orderId }) => {
     try {

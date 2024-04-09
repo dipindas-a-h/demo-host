@@ -1,5 +1,7 @@
 const sendEmail = require("./sendEmail");
 const commonFooter = require("./commonFooter");
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
+const data = readDataFromFile();
 
 const sendOrderEmail = async (attractionOrder) => {
     try {
@@ -13,9 +15,7 @@ const sendOrderEmail = async (attractionOrder) => {
               <h1 style="margin: 0;">Order Confirmation</h1>
             </div>
             <div style="background-color: #f7f7f7; padding: 20px;">
-              <p style="font-size: 18px; font-weight: bold;">Dear ${
-                  attractionOrder.name
-              },</p>
+              <p style="font-size: 18px; font-weight: bold;">Dear ${attractionOrder.name},</p>
               <p style="margin-top: 20px;">Thank you for your order. Your order details are as follows:</p>
               <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
                 <tr style="background-color: #eee;">
@@ -27,26 +27,18 @@ const sendOrderEmail = async (attractionOrder) => {
                 ${attractionOrder.activities
                     .map((activity, index) => {
                         return `
-                    <tr style="background-color: ${
-                        index % 2 === 0 ? "#eee" : ""
-                    };">
+                    <tr style="background-color: ${index % 2 === 0 ? "#eee" : ""};">
                     <td style="padding: 10px; border: 1px solid #ddd;">Attraction:</td>
                       <td style="padding: 10px; border: 1px solid #ddd;">${
                           activity.activity.attraction.title
                       }</td>
                
                     </tr>
-                    <tr style="background-color: ${
-                        index % 2 === 0 ? "" : "#eee"
-                    };">
+                    <tr style="background-color: ${index % 2 === 0 ? "" : "#eee"};">
                     <td style="padding: 10px; border: 1px solid #ddd;">Order Type:</td>
-                    <td style="padding: 10px; border: 1px solid #ddd;">${
-                        activity.bookingType
-                    }</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${activity.bookingType}</td>
                     </tr>
-                          <tr style="background-color: ${
-                              index % 2 === 0 ? "#eee" : ""
-                          };">
+                          <tr style="background-color: ${index % 2 === 0 ? "#eee" : ""};">
                       <td style="padding: 10px; border: 1px solid #ddd;">Total Amount:</td>
                       <td style="padding: 10px; border: 1px solid #ddd;">${
                           activity.activity.amount
@@ -59,7 +51,9 @@ const sendOrderEmail = async (attractionOrder) => {
               </table>
               <p style="margin-top: 20px;">Attached to this email, you will find a PDF of your booking/ticket and invoice. Please keep these documents for your records.</p>
               <p>If you have any questions or concerns regarding your order, please do not hesitate to contact us.</p>
-              <p style="margin-top: 20px;">Thank you for choosing ${process.env.COMPANY_NAME}. We look forward to serving you.</p>
+              <p style="margin-top: 20px;">Thank you for choosing ${
+                  data?.COMPANY_NAME
+              }. We look forward to serving you.</p>
               ${footerHtml}
 
            

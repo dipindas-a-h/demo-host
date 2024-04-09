@@ -6,10 +6,14 @@ let bearerToken = "";
 const puppeteer = require("puppeteer");
 const path = require("path");
 const createInsurnaceGroupContractUtils = require("../../utils/insurance/createInsuranceGroupContract");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
+
+const data = readDataFromFile()
 
 const getLogin = async () => {
     try {
-        const baseUrl = process.env.INSURANCE_SERVER_URL;
+        const baseUrl = data?.INSURANCE_SERVER_URL;
         const path = `/login`;
         const url = baseUrl + path;
 
@@ -19,8 +23,8 @@ const getLogin = async () => {
         };
 
         let body = {
-            username: process.env.CYGNET_USERNAME,
-            password: process.env.CYGNET_PASSWORD,
+            username: data?.CYGNET_USERNAME,
+            password: data?.CYGNET_PASSWORD,
         };
 
         let response = await axios.post(url, body, {
@@ -45,7 +49,7 @@ const createInsuranceQuotation = async (generalData, beneficiaryData) => {
     try {
         let token = await getLogin();
 
-        const baseUrl = process.env.INSURANCE_SERVER_URL;
+        const baseUrl = data?.INSURANCE_SERVER_URL;
         const path = `/v2/get-plans`;
         const url = baseUrl + path;
 
@@ -56,7 +60,7 @@ const createInsuranceQuotation = async (generalData, beneficiaryData) => {
                 "Content-Type": "application/json",
                 Accept: "application/json",
                 Authorization: `Bearer ${token}`,
-                Tenant: process.env.CYGNET_TENANT,
+                Tenant: data?.CYGNET_TENANT,
             },
         });
 
@@ -76,7 +80,7 @@ const createContract = async (insuranceContract, insurancePlan) => {
         let token = await getLogin();
 
         if (insuranceContract.travelType === "SG") {
-            const baseUrl = process.env.INSURANCE_SERVER_URL;
+            const baseUrl = data?.INSURANCE_SERVER_URL;
             const path = `/v2/create-contract`;
             const url = baseUrl + path;
 
@@ -98,7 +102,7 @@ const createContract = async (insuranceContract, insurancePlan) => {
                     "Content-Type": "application/json",
                     Accept: "application/json",
                     Authorization: `Bearer ${token}`,
-                    Tenant: process.env.CYGNET_TENANT,
+                    Tenant: data?.CYGNET_TENANT,
                 },
             });
 
@@ -111,7 +115,7 @@ const createContract = async (insuranceContract, insurancePlan) => {
                 contractId: response.data.contract_id,
             };
         } else if (insuranceContract.travelType === "FM") {
-            const baseUrl = process.env.INSURANCE_SERVER_URL;
+            const baseUrl = data?.INSURANCE_SERVER_URL;
             const path = `/v2/create-contract`;
             const url = baseUrl + path;
 
@@ -131,7 +135,7 @@ const createContract = async (insuranceContract, insurancePlan) => {
                     "Content-Type": "application/json",
                     Accept: "application/json",
                     Authorization: `Bearer ${token}`,
-                    Tenant: process.env.CYGNET_TENANT,
+                    Tenant: data?.CYGNET_TENANT,
                 },
             });
 
@@ -154,7 +158,7 @@ const downloadContractPdf = async ({ contractId, res }) => {
     try {
         let token = await getLogin();
 
-        const baseUrl = process.env.INSURANCE_SERVER_URL;
+        const baseUrl = data?.INSURANCE_SERVER_URL;
         const path = `/v2/contract-pdf/${contractId}`;
         const url = baseUrl + path;
 
@@ -163,7 +167,7 @@ const downloadContractPdf = async ({ contractId, res }) => {
                 "Content-Type": "application/json",
                 Accept: "application/json",
                 Authorization: `Bearer ${token}`,
-                Tenant: process.env.CYGNET_TENANT,
+                Tenant: data?.CYGNET_TENANT,
             },
             responseType: "arraybuffer",
         });

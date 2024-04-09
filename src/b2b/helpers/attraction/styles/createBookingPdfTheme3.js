@@ -2,7 +2,8 @@
 const bwipjs = require("bwip-js");
 const qrcode = require("qrcode");
 const puppeteer = require("puppeteer");
-
+const { readDataFromFile } = require("../../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 const createBookingPdfTheme3 = async (activity) => {
     let combinedHtmlDoc = "";
     let options = {
@@ -12,7 +13,7 @@ const createBookingPdfTheme3 = async (activity) => {
 
     async function generatePdfAsBuffer(htmlContent, options) {
         // const browser = await puppeteer.launch();
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [
@@ -81,7 +82,7 @@ const createBookingPdfTheme3 = async (activity) => {
             "
         >
         <img style="width: 200px; height: 100px; padding-left: 30px" src="${
-            process.env.SERVER_URL
+            data?.SERVER_URL
         }${activity?.attraction?.logo}" alt="">
             <div
                 style="
@@ -289,7 +290,7 @@ const createBookingPdfTheme3 = async (activity) => {
                     display: block;
                     justify-content: flex-end;
                 "
-                src="${process.env.SERVER_URL}${activity?.attraction?.images[0]}"
+                src="${data?.SERVER_URL}${activity?.attraction?.images[0]}"
                 alt="Barcode Image"
             />
         </div>

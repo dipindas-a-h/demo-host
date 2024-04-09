@@ -1,9 +1,12 @@
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
 const createInsurnacePlansUtils = (generalData, beneficiaryData) => {
     try {
+        const configData = readDataFromFile()
         const data = {
             businessLine: "travel",
             contractType: generalData.travelType,
-            agency: process.env.CYGNET_AGENCY,
+            agency: configData?.CYGNET_AGENCY,
             countryOfResidence: "ARE",
             destinations: [
                 {

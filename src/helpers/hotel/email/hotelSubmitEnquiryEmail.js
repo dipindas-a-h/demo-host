@@ -1,9 +1,11 @@
 const { sendEmail } = require("../../../helpers");
 const { formatDate } = require("../../../utils");
 const { B2BHotelRequest } = require("../../../models/hotel");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data =  readDataFromFile()
 
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
 
 const hotelSubmitEnquiryEmail = async ({ hotelEnquiryId }) => {
     try {
@@ -163,7 +165,7 @@ const hotelSubmitEnquiryEmail = async ({ hotelEnquiryId }) => {
         }
 
         let emails;
-        if (process.env.NODE_ENV === "production") {
+        if (data?.NODE_ENV === "production") {
             emails = "contracting@travellerschoice.ae, accounts@travellerschoice.ae";
         } else {
             emails = "nihal@hami.live";

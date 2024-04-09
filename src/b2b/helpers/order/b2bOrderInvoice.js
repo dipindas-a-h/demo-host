@@ -4,6 +4,8 @@ const path = require("path");
 const { InvoiceSettings } = require("../../../models/global");
 const { B2BOrder, B2BAttractionOrder, B2BTransferOrder } = require("../../models");
 const { formatDate } = require("../../../utils");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 
 const b2bOrderInvoice = async ({ orderId, resellerId }) => {
     try {
@@ -64,7 +66,7 @@ const b2bOrderInvoice = async ({ orderId, resellerId }) => {
 
         async function generatePdfAsBuffer(htmlContent, options) {
             // const browser = await puppeteer.launch();
-            let browser = process?.env?.PRODUCTION
+            let browser = data?.PRODUCTION
                 ? await puppeteer.launch({
                       executablePath: "/usr/bin/chromium-browser",
                       args: [
@@ -92,7 +94,7 @@ const b2bOrderInvoice = async ({ orderId, resellerId }) => {
             <div style="border: 1px solid #c7c7c7; padding: 5px 10px;">
                 <div style="margin-bottom: 5px;">
                     <img
-                        src="${process.env.SERVER_URL + invoiceSettings?.companyLogo}"
+                        src="${data?.SERVER_URL + invoiceSettings?.companyLogo}"
                         alt=""
                         width="150"
                     />

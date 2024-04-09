@@ -1,12 +1,15 @@
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../../helpers");
+const data = readDataFromFile()
 
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
 
 const hotelOrderCancellationRequestEmailForDpt = async ({ mainAgentId, name, referenceNumber }) => {
     try {
         let emails;
-        if (process.env.NODE_ENV === "production") {
+        if (data?.NODE_ENV === "production") {
             emails = " contracting@travellerschoice.ae, accounts@travellerschoice.ae";
         } else {
             emails = `nihal@hami.live`;

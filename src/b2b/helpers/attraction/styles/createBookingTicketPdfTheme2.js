@@ -2,7 +2,8 @@
 const bwipjs = require("bwip-js");
 const qrcode = require("qrcode");
 const puppeteer = require("puppeteer");
-
+const { readDataFromFile } = require("../../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 const createBookingTicketPdfTheme2 = async (activity) => {
     let combinedHtmlDoc = "";
     let options = {
@@ -12,7 +13,7 @@ const createBookingTicketPdfTheme2 = async (activity) => {
 
     async function generatePdfAsBuffer(htmlContent, options) {
         // const browser = await puppeteer.launch();
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [
@@ -84,7 +85,7 @@ const createBookingTicketPdfTheme2 = async (activity) => {
                     position: relative;
                 "
             >
-            <img style="width: 200px; height: 100px;" src="${process.env.SERVER_URL}${
+            <img style="width: 200px; height: 100px;" src="${data?.SERVER_URL}${
         activity?.attraction?.logo
     }" alt="">
                 <div
@@ -243,7 +244,7 @@ const createBookingTicketPdfTheme2 = async (activity) => {
 ${activity?.attraction?.images
     ?.slice(0, 3)
     ?.map((link, index) => {
-        return `<img src="${process.env.SERVER_URL}${link}" alt="Barcode Image" style="width: 100%; height: 150px; object-fit: cover; box-sizing: border-box;" />`;
+        return `<img src="${data?.SERVER_URL}${link}" alt="Barcode Image" style="width: 100%; height: 150px; object-fit: cover; box-sizing: border-box;" />`;
     })
     .join("")}
 </div>

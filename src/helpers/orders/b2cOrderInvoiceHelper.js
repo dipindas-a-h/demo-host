@@ -2,7 +2,9 @@ const puppeteer = require("puppeteer");
 const path = require("path");
 const { InvoiceSettings } = require("../../models/global")
 const { B2COrder, B2CTransferOrder, AttractionOrder } = require("../../models")
-const { formatDate } = require("../../utils")
+const { formatDate } = require("../../utils");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 
 const b2cOrderInvoice = async ({orderId, user}) => {
     try{
@@ -82,7 +84,7 @@ const b2cOrderInvoice = async ({orderId, user}) => {
             <div style="border: 1px solid #c7c7c7; padding: 5px 10px;">
                 <div style="margin-bottom: 5px;">
                     <img
-                        src="${process.env.SERVER_URL + invoiceSettings?.companyLogo}"
+                        src="${data?.SERVER_URL + invoiceSettings?.companyLogo}"
                         alt=""
                         width="150"
                     />

@@ -1,10 +1,12 @@
 const axios = require("axios");
 const { isValidObjectId } = require("mongoose");
 const { User, AttractionActivity, AttractionOrder } = require("../models");
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
 
-const MERCHANT_CODE = process.env.TABBY_MERCHANT_CODE;
-const PUBLIC_KEY = process.env.TABBY_PUBLIC_KEY;
-const SECRET_KEY = process.env.TABBY_SECRET_API_KEY;
+const MERCHANT_CODE = data?.TABBY_MERCHANT_CODE;
+const PUBLIC_KEY = data?.TABBY_PUBLIC_KEY;
+const SECRET_KEY = data?.TABBY_SECRET_API_KEY;
 
 const b2cTabbyFormHandler = async ({
     res,
@@ -161,9 +163,9 @@ const b2cTabbyFormHandler = async ({
             lang: "en",
             merchant_code: MERCHANT_CODE,
             merchant_urls: {
-                success: `${process.env.REACT_APP_URL}/attraction/${orderId}`,
-                cancel: `${process.env.REACT_APP_URL}/attraction/failure?paymentProcessor=tabby&status=cancel`,
-                failure: `${process.env.REACT_APP_URL}/attraction/failure?paymentProcessor=tabby&status=failure`,
+                success: `${data?.REACT_APP_URL}/attraction/${orderId}`,
+                cancel: `${data?.REACT_APP_URL}/attraction/failure?paymentProcessor=tabby&status=cancel`,
+                failure: `${data?.REACT_APP_URL}/attraction/failure?paymentProcessor=tabby&status=failure`,
             },
         };
 

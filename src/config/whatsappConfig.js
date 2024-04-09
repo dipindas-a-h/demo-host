@@ -5,7 +5,10 @@ const { MessageMedia } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
 const { WhatsappConfig } = require("../models");
 const { default: axios } = require("axios");
+const { readDataFromFile } = require("../controllers/initial/SaveDataFile");
 const store = new MongoStore({ mongoose: mongoose });
+
+const data  = readDataFromFile()
 
 let client = new Client({
     // authStrategy: new RemoteAuth({
@@ -22,8 +25,8 @@ let client = new Client({
 
 const connectWhatsApp = async (req, res) => {
     try {
-        console.log("connectWhatsApp", process.env.WHATSAPP_SERVER_URL);
-        const response = await axios.get(`${process.env.WHATSAPP_SERVER_URL}/whatsapp/connect`);
+        console.log("connectWhatsApp", data?.WHATSAPP_SERVER_URL);
+        const response = await axios.get(`${data?.WHATSAPP_SERVER_URL}/whatsapp/connect`);
 
         console.log(response.data);
     } catch (err) {
@@ -33,7 +36,7 @@ const connectWhatsApp = async (req, res) => {
 
 const getQrCodeHelper = async () => {
     try {
-        const response = await axios.get(`${process.env.WHATSAPP_SERVER_URL}/whatsapp/qr-code`);
+        const response = await axios.get(`${data?.WHATSAPP_SERVER_URL}/whatsapp/qr-code`);
         const whatsappConfig = await WhatsappConfig.findOneAndUpdate(
             { settingsNumber: 1 },
             { qrcode: response.data },
@@ -52,7 +55,7 @@ const getQrCodeHelper = async () => {
 const getReadyCheckHelper = async () => {
     try {
         const response = await axios.get(
-            `${process.env.WHATSAPP_SERVER_URL}/whatsapp/check-connected`
+            `${data?.WHATSAPP_SERVER_URL}/whatsapp/check-connected`
         );
         console.log(response.data, "data");
         if (response?.data === true) {
@@ -68,7 +71,7 @@ const getReadyCheckHelper = async () => {
 
 const logoutHelper = async () => {
     try {
-        const response = await axios.get(`${process.env.WHATSAPP_SERVER_URL}/whatsapp/logout`);
+        const response = await axios.get(`${data?.WHATSAPP_SERVER_URL}/whatsapp/logout`);
         console.log(response.data, "data");
         if (response?.data === true) {
             return true;
@@ -102,7 +105,7 @@ const logoutHelper = async () => {
 const stateHelper = async () => {
     try {
         const response = await axios.get(
-            `${process.env.WHATSAPP_SERVER_URL}/whatsapp/state-helper`
+            `${data?.WHATSAPP_SERVER_URL}/whatsapp/state-helper`
         );
         console.log(response.data, "data");
         if (response?.data === true) {
@@ -118,7 +121,7 @@ const stateHelper = async () => {
 const sendMessageHelper = async ({ type, url, path, message, number }) => {
     try {
         const response = await axios.post(
-            `${process.env.WHATSAPP_SERVER_URL}/whatsapp/send-message`,
+            `${data?.WHATSAPP_SERVER_URL}/whatsapp/send-message`,
             {
                 type,
                 url,
