@@ -1,7 +1,11 @@
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../../helpers");
 
-const companyLogo = process.env.COMPANY_LOGO;
-const companyRegName = process.env.COMPANY_REGISTRATION_NAME;
+
+const data = readDataFromFile()
+
+const companyLogo = data?.COMPANY_LOGO;
+const companyRegName = data?.COMPANY_REGISTRATION_NAME;
 
 const sendResellerCredentials = async ({ companyName, email, password, agentCode }) => {
     try {
@@ -11,12 +15,12 @@ const sendResellerCredentials = async ({ companyName, email, password, agentCode
             `<div>
                <span>Dear ${companyName},</span><br />
                <br />
-               <span>Thank you for registering with the ${process.env.COMPANY_NAME} B2B Portal! Your account is currently under review. We appreciate your patience.</span>
+               <span>Thank you for registering with the ${data?.COMPANY_NAME} B2B Portal! Your account is currently under review. We appreciate your patience.</span>
                <br />
                <br />
                <span>Below, you will find your account details:</span><br />
                 <br />
-                <span>B2b Portal URL : ${process.env.B2B_WEB_URL}</span><br />
+                <span>B2b Portal URL : ${data?.B2B_WEB_URL}</span><br />
                 <span><strong>Agent Code :</strong> ${agentCode}</span><br />
                 <span><strong>Email :</strong> ${email}</span><br />
                 <span><strong>Password :</strong> ${password}</span>

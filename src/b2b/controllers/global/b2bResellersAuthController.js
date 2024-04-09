@@ -13,6 +13,10 @@ const {
     resellerCompanyUpdateSchema,
     resellerPasswordUpdateSchema,
 } = require("../../validations/b2bReseller.schema");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
+
+const data = readDataFromFile()
 
 module.exports = {
     resellerRegister: async (req, res) => {
@@ -118,7 +122,7 @@ module.exports = {
                 return sendErrorResponse(res, 400, "Invalid credentials");
             }
 
-            if (process.env.LOGIN_AGENTCODE_REQUIRED === "true") {
+            if (data?.LOGIN_AGENTCODE_REQUIRED === "true") {
                 if (reseller.agentCode !== Number(agentCode)) {
                     return sendErrorResponse(res, 400, "Invalid credentials ");
                 }

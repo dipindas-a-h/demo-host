@@ -2,6 +2,10 @@
 const bwipjs = require("bwip-js");
 const qrcode = require("qrcode");
 const puppeteer = require("puppeteer");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
+
+const data = readDataFromFile()
+
 
 const createA2aSingleTicketPdf = async (order) => {
     let combinedHtmlDoc = "";
@@ -12,7 +16,7 @@ const createA2aSingleTicketPdf = async (order) => {
 
     async function generatePdfAsBuffer(htmlContent, options) {
         // const browser = await puppeteer.launch();
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [
@@ -146,7 +150,7 @@ const createA2aSingleTicketPdf = async (order) => {
           "
         >
         <img style="height : 50px; width :100px;   text-align: center; align-tems : center ; object-fit: fit;" src="${
-            process.env.SERVER_URL
+            data?.SERVER_URL
         }${order.a2aTicket.airlineOnwardLogo}"  alt="">
           <img style="height : 50px; width :150px;" src="data:image/png;base64,${barcodeImage}" />
         </div>
@@ -247,7 +251,7 @@ const createA2aSingleTicketPdf = async (order) => {
             "
           >
           <img src="${
-              process.env.SERVER_URL
+              data?.SERVER_URL
           }/public/images/admins/visaChange2.jpeg" alt="Image description" style="width: 150px; height: 100px; object-fit: fit" />
           </div>
 

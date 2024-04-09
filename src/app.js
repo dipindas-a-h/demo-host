@@ -3,8 +3,11 @@ const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
+const { readDataFromFile } = require("./controllers/initial/SaveDataFile");
 
-const NODE_ENV = process.env.NODE_ENV === "production" ? "production" : "development";
+const data = readDataFromFile()
+
+const NODE_ENV = data?.NODE_ENV === "production" ? "production" : "development";
 
 require("dotenv").config({
     path: path.join(__dirname, "../" + `.env.${NODE_ENV}`),

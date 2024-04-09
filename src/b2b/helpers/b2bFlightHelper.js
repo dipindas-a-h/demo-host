@@ -1,9 +1,12 @@
 const axios = require("axios");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 
+
+const data = readDataFromFile()
 module.exports = {
     flightAvailabilitySearchRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = "/api/v1/flights/search/availability";
 
@@ -20,7 +23,7 @@ module.exports = {
 
     addToCartRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = "/api/v1/flights/add-to-cart";
 
@@ -40,7 +43,7 @@ module.exports = {
 
     getSingleFligthDetails: async (tbId) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = `/api/v1/flights/details/${tbId}`;
 
@@ -58,7 +61,7 @@ module.exports = {
 
     getSingleFlightDetailsWithAncillaryRequest: async (tbId) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = `/api/v1/flights/details/${tbId}/ancillaries`;
 
@@ -76,7 +79,7 @@ module.exports = {
 
     addCustomerFlightDetailsRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = "/api/v1/flights/passenger-details/add";
 
@@ -97,7 +100,7 @@ module.exports = {
 
     addSelectedAncillariesRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = "/api/v1/flights/ancillaries/add";
 
@@ -119,7 +122,7 @@ module.exports = {
 
     initateFligthBookingRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = `/api/v1/flights/bookings/initiate`;
 
@@ -139,7 +142,7 @@ module.exports = {
 
     completeFligthBookingRequest: async (request) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = "/api/v1/flights/bookings/complete";
 
@@ -159,7 +162,7 @@ module.exports = {
 
     flightBookingPdfRequest: async ({ referenceNumber, totalMarkup, reseller }) => {
         try {
-            const baseURL = process.env.FLIGHT_SERVER_URL;
+            const baseURL = data?.FLIGHT_SERVER_URL;
 
             const endpointURL = `/api/v1/bookings/single/download-pdf/${referenceNumber}`;
             let response = await axios.post(
@@ -167,10 +170,10 @@ module.exports = {
                 {
                     companyName: reseller?.companyName
                         ? reseller?.companyName
-                        : process.env.COMPANY_NAME,
+                        : data?.COMPANY_NAME,
                     companyLogo: reseller?.companyLogo
                         ? reseller?.companyLogo
-                        : process.env.COMPANY_LOGO,
+                        : data?.COMPANY_LOGO,
                     yourMarkupAmount: totalMarkup,
                 },
                 {

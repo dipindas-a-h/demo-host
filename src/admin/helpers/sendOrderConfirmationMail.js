@@ -1,6 +1,9 @@
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../helpers");
 const commonFooter = require("../../helpers/commonFooter");
 
+
+const data = readDataFromFile()
 const sendOrderConfirmationEmail = async (email,name, attractionOrder,bookingConfirmationNumber ,note) => {
   try {
 
@@ -76,7 +79,7 @@ const sendOrderConfirmationEmail = async (email,name, attractionOrder,bookingCon
              
               </table>
               <p>If you have any questions or concerns regarding your order, please do not hesitate to contact us.</p>
-              <p style="margin-top: 20px;">Thank you for choosing ${process.env.COMPANY_NAME}. We look forward to serving you.</p>
+              <p style="margin-top: 20px;">Thank you for choosing ${data?.COMPANY_NAME}. We look forward to serving you.</p>
               ${footerHtml}
               </div>
           </body>

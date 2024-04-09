@@ -1,10 +1,13 @@
 const axios = require("axios");
 let bearerToken = "";
 const { getInsurancePlans } = require("../../utils");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
+const data = readDataFromFile()
 
 const getLogin = async (req, res) => {
     try {
-        const baseUrl = process.env.INSURANCE_SERVER_URL;
+        const baseUrl = data?.INSURANCE_SERVER_URL;
         const path = `/login`;
         const url = baseUrl + path;
 
@@ -14,8 +17,8 @@ const getLogin = async (req, res) => {
         };
 
         let body = {
-            username: process.env.CYGNET_USERNAME,
-            password: process.env.CYGNET_PASSWORD,
+            username: data?.CYGNET_USERNAME,
+            password: data?.CYGNET_PASSWORD,
         };
 
         let response = await axios.post(url, body, {
@@ -38,7 +41,7 @@ const getLogin = async (req, res) => {
 const fetchInsurancePlans = async () => {
     try {
         let token = await getLogin();
-        const baseUrl = process.env.INSURANCE_SERVER_URL;
+        const baseUrl = data?.INSURANCE_SERVER_URL;
         const path = `/v2/get-plans`;
         const url = baseUrl + path;
 
@@ -48,7 +51,7 @@ const fetchInsurancePlans = async () => {
                 "Content-Type": "application/json",
                 Accept: "application/json",
                 Authorization: `Bearer ${token}`,
-                Tenant: process.env.CYGNET_TENANT,
+                Tenant: data?.CYGNET_TENANT,
             },
         });
 

@@ -18,9 +18,10 @@ const { Country } = require("../../../models");
 const { State, City, Area } = require("../../../models/global");
 const { saveSingleHotel } = require("../../helpers/hotel/hotelBedsHelpers");
 const logger = require("../../../logger");
-
-const publicKey = process.env.HOTEL_BEDS_API_KEY;
-const privateKey = process.env.HOTEL_BEDS_SECRET;
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+const data = readDataFromFile()
+const publicKey = data?.HOTEL_BEDS_API_KEY;
+const privateKey = data?.HOTEL_BEDS_SECRET;
 
 module.exports = {
     loadBoardTypes: async (req, res) => {
@@ -39,7 +40,7 @@ module.exports = {
                 to: 100,
             };
             const response = await axios.get(
-                `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/boards?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/boards?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                 { headers: headers }
             );
 
@@ -84,7 +85,7 @@ module.exports = {
                 to: 1000,
             };
             const response = await axios.get(
-                `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/facilitygroups?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/facilitygroups?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                 { headers: headers }
             );
 
@@ -112,7 +113,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/facilities?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/facilities?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                     { headers: headers }
                 );
 
@@ -169,7 +170,7 @@ module.exports = {
                 to: 100,
             };
             const response = await axios.get(
-                `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/accommodations?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/accommodations?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                 { headers: headers }
             );
 
@@ -218,7 +219,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/rooms?fields=all&language=ENG&useSecondaryLanguage=True&to=${params.to}&from=${params.from}`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/rooms?fields=all&language=ENG&useSecondaryLanguage=True&to=${params.to}&from=${params.from}`,
                     { headers: headers }
                 );
 
@@ -273,7 +274,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/chains?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/chains?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                     { headers: headers }
                 );
 
@@ -323,7 +324,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/ratecomments?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/types/ratecomments?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=True`,
                     { headers: headers }
                 );
 
@@ -471,7 +472,7 @@ module.exports = {
                         to: (i + 1) * limit,
                     };
                     const response = await axios.get(
-                        `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/hotels?fields=all&language=ENG&useSecondaryLanguage=false&countryCode=${params.countryCode}&to=${params.to}&from=${params.from}`,
+                        `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/hotels?fields=all&language=ENG&useSecondaryLanguage=false&countryCode=${params.countryCode}&to=${params.to}&from=${params.from}`,
                         { headers: headers }
                     );
                     iterationCount = Math.ceil(response.data.total / limit);
@@ -589,7 +590,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/locations/countries?fields=all&language=ENG&from=${params.from}&to=${params.to}`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/locations/countries?fields=all&language=ENG&from=${params.from}&to=${params.to}`,
                     { headers: headers }
                 );
 
@@ -662,7 +663,7 @@ module.exports = {
                     to: (i + 1) * 1000,
                 };
                 const response = await axios.get(
-                    `${process.env.HOTEL_BEDS_URL}/hotel-content-api/1.0/locations/destinations?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=false`,
+                    `${data?.HOTEL_BEDS_URL}/hotel-content-api/1.0/locations/destinations?fields=all&language=ENG&from=${params.from}&to=${params.to}&useSecondaryLanguage=false`,
                     { headers: headers }
                 );
 

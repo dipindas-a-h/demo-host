@@ -1,6 +1,11 @@
 const axios = require("axios");
 const { ApiMaster } = require("../../models");
 const { parseStringPromise } = require("xml2js");
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
+
+const data = readDataFromFile(
+
+)
 
 module.exports = {
     AuthenticationRequest: async () => {
@@ -9,8 +14,8 @@ module.exports = {
 
             const url = api.liveUrl;
 
-            const username = process.env.BURJ_KHALIFA_USERNAME;
-            const password = process.env.BURJ_KHALIFA_PASSWORD;
+            const username = data?.BURJ_KHALIFA_USERNAME;
+            const password = data?.BURJ_KHALIFA_PASSWORD;
 
             const credentials = username + ":" + password;
             const authHeader = "Basic " + Buffer.from(credentials).toString("base64");
@@ -119,8 +124,8 @@ module.exports = {
             console.log(api, "api");
             const url = api.liveUrl;
 
-            const username = process.env.BURJ_KHALIFA_USERNAME;
-            const password = process.env.BURJ_KHALIFA_PASSWORD;
+            const username = data?.BURJ_KHALIFA_USERNAME;
+            const password = data?.BURJ_KHALIFA_PASSWORD;
 
             const credentials = username + ":" + password;
             const authHeader = "Basic " + Buffer.from(credentials).toString("base64");
@@ -335,8 +340,8 @@ module.exports = {
         try {
             const api = await ApiMaster.findOne({ apiCode: "ATBRJ01" });
 
-            const username = process.env.BURJ_KHALIFA_USERNAME;
-            const password = process.env.BURJ_KHALIFA_PASSWORD;
+            const username = data?.BURJ_KHALIFA_USERNAME;
+            const password = data?.BURJ_KHALIFA_PASSWORD;
 
             const credentials = username + ":" + password;
             const authHeader = "Basic " + Buffer.from(credentials).toString("base64");

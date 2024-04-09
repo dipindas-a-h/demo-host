@@ -1,8 +1,11 @@
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../helpers");
+
+const data = readDataFromFile()
 
 const sendVisaApplicationApproveEmail = (visaApplication, filteredTraveller, visa) => {
     try {
-        const visaUploadUrl = process.env.SERVER_URL + visa;
+        const visaUploadUrl = data?.SERVER_URL + visa;
         sendEmail(
             visaApplication.email,
             `Visa Application Approved Email - ${visaApplication.referenceNumber}`,

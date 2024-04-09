@@ -17,7 +17,10 @@ const {
     B2BSubAgentAttractionMarkup,
 } = require("../../models");
 const { getTimeSlotWithRate } = require("../../helpers");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 
+
+const data = readDataFromFile()
 module.exports = {
     getApiAttractionAllDestinations: async (req, res) => {
         try {
@@ -26,7 +29,7 @@ module.exports = {
                 .select({
                     code: 1,
                     name: 1,
-                    image: { $concat: [process.env.SERVER_URL, "$image"] },
+                    image: { $concat: [data?.SERVER_URL, "$image"] },
                     _id: 0,
                 })
                 .sort({ name: 1 })
@@ -92,7 +95,7 @@ module.exports = {
                             input: "$images",
                             as: "image",
                             in: {
-                                $concat: [process.env.SERVER_URL, "$$image"],
+                                $concat: [data?.SERVER_URL, "$$image"],
                             },
                         },
                     },

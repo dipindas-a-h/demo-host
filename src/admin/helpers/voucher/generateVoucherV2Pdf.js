@@ -3,6 +3,10 @@ const path = require("path");
 const moment = require("moment");
 
 const { formatDate } = require("../../../utils");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
+
+
+const data = readDataFromFile()
 
 const generateVoucherV2Pdf = async ({ voucher, dateTime }) => {
     let combinedHtmlDoc = "";
@@ -11,9 +15,11 @@ const generateVoucherV2Pdf = async ({ voucher, dateTime }) => {
         type: "buffer",
     };
 
+
+
     async function generatePdfAsBuffer(htmlContent, options) {
         // const browser = await puppeteer.launch();
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [
@@ -37,7 +43,7 @@ const generateVoucherV2Pdf = async ({ voucher, dateTime }) => {
     <div class="page">
         <div class="image-container">
             <img
-                src="${process.env.COMPANY_LOGO}"
+                src="${data?.COMPANY_LOGO}"
                 alt="logo"
                 class="logo-image"
             />

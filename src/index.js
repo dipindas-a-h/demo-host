@@ -5,14 +5,18 @@ const { app } = require("./app");
 const { connectRedisDb } = require("./config/cache");
 const { connectMonogdb } = require("./config/dbConfig");
 const { connectWhatsApp } = require("./config/whatsappConfig");
+const { readDataFromFile } = require("./controllers/initial/SaveDataFile");
 const CronJob = require("./cron");
 
+
+
+const data = readDataFromFile()
 const PORT = process.env.PORT || 8189;
-const NODE_ENV = process.env.NODE_ENV === "production" ? "production" : "development";
+const NODE_ENV = data?.NODE_ENV === "production" ? "production" : "development";
 
 const start = async () => {
     try {
-        if (process.env.REDIS_REQUIRED === "true") {
+        if (data?.REDIS_REQUIRED === "true") {
             await connectRedisDb();
         }
         await connectMonogdb();

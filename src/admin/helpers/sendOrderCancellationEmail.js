@@ -1,5 +1,9 @@
+const { readDataFromFile } = require("../../controllers/initial/SaveDataFile");
 const { sendEmail } = require("../../helpers");
 const commonFooter = require("../../helpers/commonFooter");
+
+
+const data = readDataFromFile()
 
 const sendOrderCancellationEmail = async (
     email,
@@ -39,7 +43,7 @@ const sendOrderCancellationEmail = async (
               <p  style="margin-top: 20px;>We understand that this may cause you inconvenience and we apologize for any inconvenience caused. We assure you that we take these matters seriously and our team is working to ensure that such incidents do not happen again in the future</p>
               <p  style="margin-top: 20px;>As the order has been cancelled, there will be no charges to your account, and any funds previously authorized for this order will be released. </p>
               <p>If you have any questions or concerns regarding your order, please do not hesitate to contact us.</p>
-              <p style="margin-top: 20px;">Thank you for choosing ${process.env.COMPANY_NAME}. We look forward to serving you.</p>
+              <p style="margin-top: 20px;">Thank you for choosing ${data?.COMPANY_NAME}. We look forward to serving you.</p>
               ${footerHtml}
               </div>
           </body>

@@ -1,8 +1,11 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
 const { formatDate } = require("../../../utils");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 
-const companyLogo = process.env.COMPANY_LOGO;
+
+const data = readDataFromFile()
+const companyLogo = data?.COMPANY_LOGO;
 
 const createHotelVoucher = async ({ hotelOrder }) => {
     let combinedHtmlDoc = "";
@@ -13,7 +16,7 @@ const createHotelVoucher = async ({ hotelOrder }) => {
 
     async function generatePdfAsBuffer(htmlContent, options) {
         // const browser = await puppeteer.launch();
-        let browser = process?.env?.PRODUCTION
+        let browser = data?.PRODUCTION
             ? await puppeteer.launch({
                   executablePath: "/usr/bin/chromium-browser",
                   args: [

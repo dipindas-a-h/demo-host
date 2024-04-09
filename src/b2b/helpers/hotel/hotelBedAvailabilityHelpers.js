@@ -3,9 +3,12 @@ const crypto = require("crypto");
 
 const { HotelHbRateComment, RoomType } = require("../../../models/hotel");
 const { createHotelLog } = require("./hotelLogsHelpers");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 
-const publicKey = process.env.HOTEL_BEDS_API_KEY;
-const privateKey = process.env.HOTEL_BEDS_SECRET;
+
+const data = readDataFromFile()
+const publicKey = data?.HOTEL_BEDS_API_KEY;
+const privateKey = data?.HOTEL_BEDS_SECRET;
 
 const getAllHotelsHbAvailability = async ({
     fromDate,
@@ -71,7 +74,7 @@ const getAllHotelsHbAvailability = async ({
             };
 
             const response = await axios.post(
-                `${process.env.HOTEL_BEDS_URL}/hotel-api/1.0/hotels`,
+                `${data?.HOTEL_BEDS_URL}/hotel-api/1.0/hotels`,
                 body,
                 {
                     headers: headers,
@@ -179,7 +182,7 @@ const getSingleHotelBedAvailability = async ({
             };
 
             const axiosReq = axios.post(
-                `${process.env.HOTEL_BEDS_URL}/hotel-api/1.0/hotels`,
+                `${data?.HOTEL_BEDS_URL}/hotel-api/1.0/hotels`,
                 body,
                 {
                     headers: headers,
@@ -629,7 +632,7 @@ const getSingleHotelBedRate = async ({ rateKey, searchId, resellerId }) => {
         const signature = publicKey + privateKey + utcDate;
         const signatureHash = crypto.createHash("sha256").update(signature).digest("hex");
 
-        const url = `${process.env.HOTEL_BEDS_URL}/hotel-api/1.0/checkrates`;
+        const url = `${data?.HOTEL_BEDS_URL}/hotel-api/1.0/checkrates`;
         const headers = {
             "Api-key": publicKey,
             "X-Signature": signatureHash,
@@ -682,7 +685,7 @@ const createHotelBedBooking = async ({
         const signature = publicKey + privateKey + utcDate;
         const signatureHash = crypto.createHash("sha256").update(signature).digest("hex");
 
-        const url = `${process.env.HOTEL_BEDS_URL}/hotel-api/1.0/bookings`;
+        const url = `${data?.HOTEL_BEDS_URL}/hotel-api/1.0/bookings`;
         const headers = {
             "Api-key": publicKey,
             "X-Signature": signatureHash,
@@ -724,7 +727,7 @@ const createHotelBedBooking = async ({
                     paxes,
                 },
             ],
-            clientReference: process.env.COMPANY_NAME,
+            clientReference: data?.COMPANY_NAME,
             remark: specialRequest,
             tolerance: 0,
         };
@@ -768,7 +771,7 @@ const cancelHotelBedBooking = async ({ bookingReference }) => {
         };
 
         const cancelResp = await axios.delete(
-            `${process.env.HOTEL_BEDS_URL}/hotel-api/1.0/bookings/${bookingReference}?cancellationFlag=CANCELLATION`,
+            `${data?.HOTEL_BEDS_URL}/hotel-api/1.0/bookings/${bookingReference}?cancellationFlag=CANCELLATION`,
             {
                 headers,
             }

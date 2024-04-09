@@ -2,13 +2,17 @@ const axios = require("axios");
 
 const { sendErrorResponse } = require("../../../helpers");
 const { OttilaCountry } = require("../../../models/Ottila");
+const { readDataFromFile } = require("../../../controllers/initial/SaveDataFile");
 
-const OTTILA_BASE_URL = process.env.OTTILA_BASE_URL;
+
+const data = readDataFromFile()
+
+const OTTILA_BASE_URL = data?.OTTILA_BASE_URL;
 const PROXY_SERVER_URL = "https://dev.mytravellerschoice.com/proxy";
 const config = {
     headers: {
-        UserName: process.env.OTTILA_USERNAME,
-        Password: process.env.OTTILA_PASSWORD,
+        UserName: data?.OTTILA_USERNAME,
+        Password: data?.OTTILA_PASSWORD,
     },
 };
 
