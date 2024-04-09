@@ -5,6 +5,8 @@ const {createInitialData,getInitialData,deleteInitialData,clearInitialData,updat
 configRouter.post ('/',createInitialData)
 configRouter.get ('/',getInitialData)
 configRouter.delete ('/:id',deleteInitialData)
+configRouter.delete ('/',clearInitialData)
+
 
 
 // configRouter.post ('/',()=> console.log('datas'))
