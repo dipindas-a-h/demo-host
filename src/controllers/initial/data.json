@@ -29,6 +29,8 @@
     "COMPANY_NAME": "Travellers Choice",
     "COMPANY_REGISTRATION_NAME": "Travellers Choice Travel And Tourism LLC",
     "COMPANY_LOGO": "https://res.cloudinary.com/dartrxel9/image/upload/f_auto,q_auto/mytravellers-website-logo_va1xxc",
+    "FAV_IMAGE": "https://res.cloudinary.com/dartrxel9/image/upload/f_auto,q_auto/mytravellers-website-logo_va1xxc",
+    "COMPANY_SHORT_NAME": "TC",
     "NODE_ENV": "development",
     "REDIS_REQUIRED": true,
     "LOGIN_AGENTCODE_REQUIRED": false,
@@ -37,6 +39,6 @@
     "OTTILA_USERNAME": "Tchoice",
     "OTTILA_PASSWORD": "Tchoice_TEST@109",
     "DATA_FEED": true,
-    "_id": "661527815333f0b9814acbe3",
+    "_id": "6617bf343c0e6cc488662d83",
     "__v": 0
 }

@@ -44,6 +44,8 @@ module.exports = {
                 OTTILA_USERNAME,
                 OTTILA_PASSWORD,
                 DATA_FEED,
+                FAV_IMAGE,
+                COMPANY_SHORT_NAME
                 // Add other fields as needed
             } = req.body;
 
@@ -87,6 +89,8 @@ module.exports = {
                 OTTILA_USERNAME,
                 OTTILA_PASSWORD,
                 DATA_FEED,
+                FAV_IMAGE,
+                COMPANY_SHORT_NAME
                 // Add other fields as needed
             });
             // console.log('dataa',newConfigData)
@@ -112,14 +116,31 @@ module.exports = {
     getInitialData: async (req, res) => {
         try {
             let data = await ConfigData.find({});
+            let status = data.length > 0; // Check if data exists
+
             res.status(200).json({
+                status: status,
                 data: data,
             });
-            console.log('Get all initial data successful');
         } catch (err) {
             sendErrorResponse(res, 500, err);
         }
     },
+
+    getCompanyData: async (req, res) => {
+        try {
+            let data = await ConfigData.find({},'COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO');
+            let status = data.length > 0; // Check if data exists
+
+            res.status(200).json({
+                status: status,
+                data: data,
+            });
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
+        }
+    },
+
 
     // Delete Initial Data
     deleteInitialData: async (req, res) => {
@@ -167,20 +188,18 @@ module.exports = {
     }
 },
 
-// Update Initial Data
 updateInitialData: async (req, res) => {
     try {
-        // Retrieve the config ID and updated data from request body
         const { id } = req.params;
         const updatedData = req.body;
 
-        // Check if the config ID is provided
         if (!id) {
             return res.status(400).json({ message: 'Config ID is required' });
         }
 
-        // Update the config data in the database
+
         const updatedConfigData = await ConfigData.findByIdAndUpdate(id, updatedData, { new: true });
+        writeDataToFile(updatedConfigData);
 
         if (!updatedConfigData) {
             return res.status(404).json({ message: 'Config data not found' });
