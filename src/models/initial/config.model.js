@@ -4,6 +4,7 @@ const configDataSchema = new mongoose.Schema({
     // PORT: { type: Number },
     PRODUCTION: { type: Boolean },
     // MONGODB_URL: { type: String },
+    
     JWT_SECRET: { type: String },
     PAYPAL_CLIENT_ID: { type: String },
     PAYPAL_CLIENT_SECRET: { type: String },
@@ -33,6 +34,8 @@ const configDataSchema = new mongoose.Schema({
     COMPANY_NAME: { type: String },
     COMPANY_REGISTRATION_NAME: { type: String },
     COMPANY_LOGO: { type: String },
+    FAV_IMAGE: {type: String},
+    COMPANY_SHORT_NAME: { type: String},
     NODE_ENV: { type: String },
     REDIS_REQUIRED: { type: Boolean },
     LOGIN_AGENTCODE_REQUIRED: { type: Boolean },
