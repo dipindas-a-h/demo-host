@@ -35,7 +35,6 @@ module.exports = {
                 FLIGHT_SERVER_URL,
                 COMPANY_NAME,
                 COMPANY_REGISTRATION_NAME,
-                COMPANY_LOGO,
                 NODE_ENV,
                 REDIS_REQUIRED,
                 LOGIN_AGENTCODE_REQUIRED,
@@ -44,12 +43,15 @@ module.exports = {
                 OTTILA_USERNAME,
                 OTTILA_PASSWORD,
                 DATA_FEED,
-                FAV_IMAGE,
-                COMPANY_SHORT_NAME
-                // Add other fields as needed
+                COMPANY_SHORT_NAME,
             } = req.body;
+            const companyLogoPath = req.files["COMPANY_LOGO"]
+                ? req.files["COMPANY_LOGO"][0].path
+                : null;
+            const favImagePath = req.files["FAV_IMAGE"]
+                ? req.files["FAV_IMAGE"].map((file) => file.path)
+                : null;
 
-            // Create a new instance of ConfigData model
             const newConfigData = new ConfigData({
                 PRODUCTION,
                 JWT_SECRET,
@@ -80,7 +82,7 @@ module.exports = {
                 FLIGHT_SERVER_URL,
                 COMPANY_NAME,
                 COMPANY_REGISTRATION_NAME,
-                COMPANY_LOGO,
+                COMPANY_LOGO: companyLogoPath,
                 NODE_ENV,
                 REDIS_REQUIRED,
                 LOGIN_AGENTCODE_REQUIRED,
@@ -89,15 +91,11 @@ module.exports = {
                 OTTILA_USERNAME,
                 OTTILA_PASSWORD,
                 DATA_FEED,
-                FAV_IMAGE,
-                COMPANY_SHORT_NAME
-                // Add other fields as needed
+                FAV_IMAGE: favImagePath,
+                COMPANY_SHORT_NAME,
             });
-            // console.log('dataa',newConfigData)
 
-            // Save the new config data to the database
             await newConfigData.save();
-            // saveDataToFile(newConfigData)
             writeDataToFile(newConfigData);
             res.status(201).json({
                 message: "Configuration Created",
@@ -116,7 +114,7 @@ module.exports = {
     getInitialData: async (req, res) => {
         try {
             let data = await ConfigData.find({});
-            let status = data.length > 0; // Check if data exists
+            let status = data.length > 0; 
 
             res.status(200).json({
                 status: status,
@@ -129,8 +127,11 @@ module.exports = {
 
     getCompanyData: async (req, res) => {
         try {
-            let data = await ConfigData.find({},'COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO');
-            let status = data.length > 0; // Check if data exists
+            let data = await ConfigData.find(
+                {},
+                "COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO"
+            );
+            let status = data.length > 0; 
 
             res.status(200).json({
                 status: status,
@@ -141,82 +142,84 @@ module.exports = {
         }
     },
 
-
-    // Delete Initial Data
     deleteInitialData: async (req, res) => {
         try {
-            // Retrieve the config ID from request parameters
+           
             const configId = req.params.id;
 
-            // Check if the config ID is valid
             if (!configId) {
-                return res.status(400).json({ message: 'Config ID is required' });
+                return res.status(400).json({ message: "Config ID is required" });
             }
 
-            // Find the config data by ID and delete it
             const deletedConfigData = await ConfigData.findByIdAndDelete(configId);
 
             if (!deletedConfigData) {
-                return res.status(404).json({ message: 'Config data not found' });
+                return res.status(404).json({ message: "Config data not found" });
             }
 
-            // Delete successful
             res.status(200).json({
-                message: 'Config data deleted successfully',
+                message: "Config data deleted successfully",
                 deleted_data: deletedConfigData,
             });
 
-            console.log('Config data deleted successfully');
+            console.log("Config data deleted successfully");
         } catch (err) {
             sendErrorResponse(res, 500, err);
         }
     },
-    
-  // Clear All Initial Data
-  clearInitialData: async (req, res) => {
-    try {
-        // Delete all documents in the ConfigData collection
-        await ConfigData.deleteMany({});
 
-        res.status(200).json({
-            message: 'All initial data cleared successfully',
-        });
+    clearInitialData: async (req, res) => {
+        try {
+            await ConfigData.deleteMany({});
 
-        console.log('All initial data cleared successfully');
-    } catch (err) {
-        sendErrorResponse(res, 500, err);
-    }
-},
+            res.status(200).json({
+                message: "All initial data cleared successfully",
+            });
 
-updateInitialData: async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updatedData = req.body;
-
-        if (!id) {
-            return res.status(400).json({ message: 'Config ID is required' });
+            console.log("All initial data cleared successfully");
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
         }
+    },
 
+    updateInitialData: async (req, res) => {
+        try {
+            const configId = req.params.id; // Assuming you're passing the config ID in the URL parameter
+            const updateFields = req.body;
+    
+            // Check if the config data exists
+            const configData = await ConfigData.findById(configId);
+            if (!configData) {
+                return res.status(404).json({ message: "Configuration not found" });
+            }
+    
+            // Update the config data fields
+            for (const key in updateFields) {
+                if (Object.hasOwnProperty.call(updateFields, key)) {
+                    configData[key] = updateFields[key];
+                }
+            }
+    
+            // Handle file uploads if any
+            if (req.files) {
+                if (req.files["COMPANY_LOGO"]) {
+                    configData.COMPANY_LOGO = req.files["COMPANY_LOGO"][0].path;
+                }
+                if (req.files["FAV_IMAGE"]) {
+                    configData.FAV_IMAGE = req.files["FAV_IMAGE"].map((file) => file.path);
+                }
+            }
+    
+            // Save the updated config data
+            await configData.save();
+            writeDataToFile(configData);
 
-        const updatedConfigData = await ConfigData.findByIdAndUpdate(id, updatedData, { new: true });
-        writeDataToFile(updatedConfigData);
-
-        if (!updatedConfigData) {
-            return res.status(404).json({ message: 'Config data not found' });
+            res.status(200).json({
+                message: "Configuration updated",
+                config_data: configData,
+            });
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
         }
-
-        // Update successful
-        res.status(200).json({
-            message: 'Config data updated successfully',
-            updated_data: updatedConfigData,
-        });
-
-        console.log('Config data updated successfully');
-    } catch (err) {
-        sendErrorResponse(res, 500, err);
     }
-},   
-    
-
-    
 };

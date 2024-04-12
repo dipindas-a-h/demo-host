@@ -32,10 +32,10 @@ const sendAdminVisaApplicationEmail = require("../../b2b/helpers/sendVisaAdminEm
 const createVisaOrderInvoice = require("../../helpers/visa/createvisaOrderInvoice");
 const { readDataFromFile } = require("../initial/SaveDataFile");
 const data = readDataFromFile()
-const instance = new Razorpay({
-    key_id: data?.RAZORPAY_KEY_ID,
-    key_secret: data?.RAZORPAY_KEY_SECRET,
-});
+// const instance = new Razorpay({
+//     key_id: data?.RAZORPAY_KEY_ID,
+//     key_secret: data?.RAZORPAY_KEY_SECRET,
+// });
 
 const ccav = new nodeCCAvenue.Configure({
     merchant_id: data?.CCAVENUE_MERCHANT_ID,
@@ -216,16 +216,18 @@ module.exports = {
                 }
 
                 return res.status(200).json(response.result);
-            } else if (paymentProcessor === "razorpay") {
-                const currency = "INR";
-                const totalAmountINR = await convertCurrency(totalAmount, currency);
-                const options = {
-                    amount: totalAmountINR * 100,
-                    currency,
-                };
-                const order = await instance.orders.create(options);
-                return res.status(200).json(order);
-            } else if (paymentProcessor === "ccavenue") {
+            }
+            //  else if (paymentProcessor === "razorpay") {
+            //     const currency = "INR";
+            //     const totalAmountINR = await convertCurrency(totalAmount, currency);
+            //     const options = {
+            //         amount: totalAmountINR * 100,
+            //         currency,
+            //     };
+            //     const order = await instance.orders.create(options);
+            //     return res.status(200).json(order);
+            // } 
+            else if (paymentProcessor === "ccavenue") {
                 const orderParams = {
                     merchant_id: data?.CCAVENUE_MERCHANT_ID,
                     order_id: visaApplication?._id,
