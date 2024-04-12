@@ -221,7 +221,7 @@ module.exports = {
                     configData.COMPANY_LOGO = req.files["COMPANY_LOGO"][0].path;
                 }
                 if (req.files["FAV_IMAGE"]) {
-                    configData.FAV_IMAGE = req.files["FAV_IMAGE"].map((file) => file.path);
+                    configData.FAV_IMAGE = req.files["FAV_IMAGE"][0].path;
                 }
             }
     
