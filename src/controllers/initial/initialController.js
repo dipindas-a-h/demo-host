@@ -49,8 +49,23 @@ module.exports = {
                 ? req.files["COMPANY_LOGO"][0].path
                 : null;
             const favImagePath = req.files["FAV_IMAGE"]
-                ? req.files["FAV_IMAGE"].map((file) => file.path)
+                ? req.files["FAV_IMAGE"][0].path
                 : null;
+
+
+                if(!companyLogoPath){
+                    return res.status(400).json({ message: `Required fields are missing: COMPANY_LOGO`});
+
+                }else if(!favImagePath){
+                    return res.status(400).json({ message: `Required fields are missing: FAV_IMAGE`});
+
+                }else if(!COMPANY_NAME){
+                    return res.status(400).json({ message: `Required fields are missing: COMPANY_NAME`});
+
+                }else if(!COMPANY_SHORT_NAME){ 
+                    return res.status(400).json({ message: `Required fields are missing: COMPANY_SHORT_NAME`});
+
+                }
 
             const newConfigData = new ConfigData({
                 PRODUCTION,

@@ -6,7 +6,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/attractions");
+        cb(null, "public/images/initial");
     },
 
     filename: function (req, file, cb) {
@@ -29,7 +29,7 @@ const upload = multer({
     },
     storage: storage,
 }).fields([
-    { name: "FAV_IMAGE", maxCount: 8 },
+    { name: "FAV_IMAGE", maxCount: 1 },
     { name: "COMPANY_LOGO", maxCount: 1 },
 ]);
 
