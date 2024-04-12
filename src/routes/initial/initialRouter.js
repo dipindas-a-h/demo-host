@@ -33,8 +33,11 @@ const upload = multer({
     { name: "COMPANY_LOGO", maxCount: 1 },
 ]);
 
-const {createInitialData,getInitialData,deleteInitialData,clearInitialData,updateInitialData,getCompanyData} = require('../../controllers/initial/initialController')
+const {createInitialData,getInitialData,deleteInitialData,clearInitialData,updateInitialData,getCompanyData} = require('../../controllers/initial/initialController');
+const { adminAuth } = require('../../admin/middlewares');
 configRouter.post ('/',upload,createInitialData)
+
+configRouter.use(adminAuth)
 configRouter.get ('/',getInitialData)
 configRouter.delete ('/:id',deleteInitialData)
 configRouter.delete ('/',clearInitialData)
