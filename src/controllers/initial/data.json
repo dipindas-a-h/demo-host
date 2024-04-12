@@ -1,11 +1,9 @@
 {
     "COMPANY_NAME": " travellers Choice",
     "COMPANY_REGISTRATION_NAME": " Travellers Choice Travel And Tourism LLC",
-    "COMPANY_LOGO": "public/images/attractions/COMPANY_LOGO-1712896356483-138619648.png",
-    "FAV_IMAGE": [
-        "public/images/attractions/FAV_IMAGE-1712896356485-562140114.png"
-    ],
+    "COMPANY_LOGO": "public/images/initial/COMPANY_LOGO-1712901417955-224058514.png",
+    "FAV_IMAGE": "public/images/initial/FAV_IMAGE-1712901417959-274687080.png",
     "COMPANY_SHORT_NAME": "TC",
-    "_id": "6618b964598c8128c8aa1db5",
+    "_id": "6618cd29c1176121ce4a11ce",
     "__v": 0
 }
