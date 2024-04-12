@@ -69,7 +69,7 @@ module.exports = {
 
             const newConfigData = new ConfigData({
                 PRODUCTION,
-                JWT_SECRET,
+                JWT_SECRET :'2b53d4c4deea138f57a772b9f4d0e24a',
                 PAYPAL_CLIENT_ID,
                 PAYPAL_CLIENT_SECRET,
                 EMAIL,
