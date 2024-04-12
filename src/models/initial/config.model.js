@@ -34,7 +34,7 @@ const configDataSchema = new mongoose.Schema({
     COMPANY_NAME: { type: String },
     COMPANY_REGISTRATION_NAME: { type: String },
     COMPANY_LOGO: { type: String },
-    FAV_IMAGE: {type: String},
+    FAV_IMAGE: { type: [{ type: String}]},
     COMPANY_SHORT_NAME: { type: String},
     NODE_ENV: { type: String },
     REDIS_REQUIRED: { type: Boolean },
