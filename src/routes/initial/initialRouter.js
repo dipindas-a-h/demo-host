@@ -41,7 +41,7 @@ configRouter.delete ('/',clearInitialData)
 
 configRouter.use(adminAuth)
 configRouter.delete ('/:id',deleteInitialData)
-configRouter.patch ('/:id',upload,updateInitialData)
+configRouter.patch ('/',upload,updateInitialData)
 configRouter.get ('/company',getCompanyData)
 
 

@@ -44,6 +44,7 @@ const configDataSchema = new mongoose.Schema({
     OTTILA_USERNAME: { type: String },
     OTTILA_PASSWORD: { type: String },
     DATA_FEED: { type: Boolean },
+    CHECK:{type : Number},
 });
 
 const ConfigData = mongoose.model("ConfigData", configDataSchema);
