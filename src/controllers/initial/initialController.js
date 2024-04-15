@@ -108,6 +108,7 @@ module.exports = {
                 DATA_FEED,
                 FAV_IMAGE: favImagePath,
                 COMPANY_SHORT_NAME,
+                CHECK:1,
             });
 
             await newConfigData.save();
@@ -199,11 +200,11 @@ module.exports = {
 
     updateInitialData: async (req, res) => {
         try {
-            const configId = req.params.id; // Assuming you're passing the config ID in the URL parameter
+            // const configId = req.params.id; // Assuming you're passing the config ID in the URL parameter
             const updateFields = req.body;
     
             // Check if the config data exists
-            const configData = await ConfigData.findById(configId);
+            const configData = await ConfigData.findOne({CHECK:1})
             if (!configData) {
                 return res.status(404).json({ message: "Configuration not found" });
             }
