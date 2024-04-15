@@ -44,32 +44,59 @@ module.exports = {
                 OTTILA_PASSWORD,
                 DATA_FEED,
                 COMPANY_SHORT_NAME,
+                NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+                CLOUDINARY_API_KEY,
+                CLOUDINARY_API_SECRET,
+                CLOUDINARY_FOLDER,
+                GOOGLE_CLIENT_ID,
+                GOOGLE_CLIENT_SECRET,
+                NEXTAUTH_SECRET,
+                NEXTAUTH_URL,
+                NEXT_PUBLIC_GOOGLE_ANALYTIC_ID,
+                NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+                NEXT_PUBLIC_TABBY_MERCHANT_CODE,
+                NEXT_PUBLIC_TOURS_URL,
+                NEXT_PUBLIC_SERVER_URL,
+                NEXT_PUBLIC_CLIENT_URL,
+                NEXT_PUBLIC_CDN_URL,
+                NEXT_PUBLIC_TITLE_NAME,
+                NEXT_PUBLIC_TITLE_SHORT_NAME,
+                NEXT_PUBLIC_TITLE_SHORT_CODE,
+                NEXT_PUBLIC_COMPANY_LOGO,
+                NEXT_PUBLIC_COMPANY_FAVICON,
+                NEXT_PUBLIC_BANNER_IMAGE,
+                NEXT_PUBLIC_BANNER_VIDEO,
+                NEXT_PUBLIC_BANNER_VIDEO_MOBILE,
+                NEXT_PUBLIC_BANNER_IMAGE_MOBILE,
+                NEXT_PUBLIC_MOBILE_APP_iMAGE,
+                NEXT_PUBLIC_PLAYSTORE_URL,
+                NEXT_PUBLIC_COMPANYADDRESS1,
+                NEXT_PUBLIC_COMPANYADDRESS2,
             } = req.body;
             const companyLogoPath = req.files["COMPANY_LOGO"]
                 ? req.files["COMPANY_LOGO"][0].path
                 : null;
-            const favImagePath = req.files["FAV_IMAGE"]
-                ? req.files["FAV_IMAGE"][0].path
-                : null;
+            const favImagePath = req.files["FAV_IMAGE"] ? req.files["FAV_IMAGE"][0].path : null;
 
-
-                if(!companyLogoPath){
-                    return res.status(400).json({ message: `Required fields are missing: COMPANY_LOGO`});
-
-                }else if(!favImagePath){
-                    return res.status(400).json({ message: `Required fields are missing: FAV_IMAGE`});
-
-                }else if(!COMPANY_NAME){
-                    return res.status(400).json({ message: `Required fields are missing: COMPANY_NAME`});
-
-                }else if(!COMPANY_SHORT_NAME){ 
-                    return res.status(400).json({ message: `Required fields are missing: COMPANY_SHORT_NAME`});
-
-                }
+            if (!companyLogoPath) {
+                return res
+                    .status(400)
+                    .json({ message: `Required fields are missing: COMPANY_LOGO` });
+            } else if (!favImagePath) {
+                return res.status(400).json({ message: `Required fields are missing: FAV_IMAGE` });
+            } else if (!COMPANY_NAME) {
+                return res
+                    .status(400)
+                    .json({ message: `Required fields are missing: COMPANY_NAME` });
+            } else if (!COMPANY_SHORT_NAME) {
+                return res
+                    .status(400)
+                    .json({ message: `Required fields are missing: COMPANY_SHORT_NAME` });
+            }
 
             const newConfigData = new ConfigData({
                 PRODUCTION,
-                JWT_SECRET :'2b53d4c4deea138f57a772b9f4d0e24a',
+                JWT_SECRET: "2b53d4c4deea138f57a772b9f4d0e24a",
                 PAYPAL_CLIENT_ID,
                 PAYPAL_CLIENT_SECRET,
                 EMAIL,
@@ -108,7 +135,35 @@ module.exports = {
                 DATA_FEED,
                 FAV_IMAGE: favImagePath,
                 COMPANY_SHORT_NAME,
-                CHECK:1,
+                CHECK: 1,
+                NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+                CLOUDINARY_API_KEY,
+                CLOUDINARY_API_SECRET,
+                CLOUDINARY_FOLDER,
+                GOOGLE_CLIENT_ID,
+                GOOGLE_CLIENT_SECRET,
+                NEXTAUTH_SECRET,
+                NEXTAUTH_URL,
+                NEXT_PUBLIC_GOOGLE_ANALYTIC_ID,
+                NEXT_PUBLIC_TABBY_PUBLIC_KEY,
+                NEXT_PUBLIC_TABBY_MERCHANT_CODE,
+                NEXT_PUBLIC_TOURS_URL,
+                NEXT_PUBLIC_SERVER_URL,
+                NEXT_PUBLIC_CLIENT_URL,
+                NEXT_PUBLIC_CDN_URL,
+                NEXT_PUBLIC_TITLE_NAME,
+                NEXT_PUBLIC_TITLE_SHORT_NAME,
+                NEXT_PUBLIC_TITLE_SHORT_CODE,
+                NEXT_PUBLIC_COMPANY_LOGO,
+                NEXT_PUBLIC_COMPANY_FAVICON,
+                NEXT_PUBLIC_BANNER_IMAGE,
+                NEXT_PUBLIC_BANNER_VIDEO,
+                NEXT_PUBLIC_BANNER_VIDEO_MOBILE,
+                NEXT_PUBLIC_BANNER_IMAGE_MOBILE,
+                NEXT_PUBLIC_MOBILE_APP_iMAGE,
+                NEXT_PUBLIC_PLAYSTORE_URL,
+                NEXT_PUBLIC_COMPANYADDRESS1,
+                NEXT_PUBLIC_COMPANYADDRESS2,
             });
 
             await newConfigData.save();
@@ -130,7 +185,7 @@ module.exports = {
     getInitialData: async (req, res) => {
         try {
             let data = await ConfigData.find({});
-            let status = data.length > 0; 
+            let status = data.length > 0;
 
             res.status(200).json({
                 status: status,
@@ -147,7 +202,24 @@ module.exports = {
                 {},
                 "COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO"
             );
-            let status = data.length > 0; 
+            let status = data.length > 0;
+
+            res.status(200).json({
+                status: status,
+                data: data,
+            });
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
+        }
+    },
+
+    getRequiredData: async (req, res) => {
+        try {
+            let data = await ConfigData.find(
+                {},
+                " NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME CLOUDINARY_API_KEY CLOUDINARY_API_SECRET CLOUDINARY_FOLDER GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET NEXTAUTH_SECRET NEXTAUTH_URL NEXT_PUBLIC_GOOGLE_ANALYTIC_ID NEXT_PUBLIC_TABBY_PUBLIC_KEY NEXT_PUBLIC_TABBY_MERCHANT_CODE NEXT_PUBLIC_TOURS_URL NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_CLIENT_URL NEXT_PUBLIC_CDN_URL NEXT_PUBLIC_TITLE_NAME NEXT_PUBLIC_TITLE_SHORT_NAME NEXT_PUBLIC_TITLE_SHORT_CODE NEXT_PUBLIC_COMPANY_LOGO NEXT_PUBLIC_COMPANY_FAVICON NEXT_PUBLIC_BANNER_IMAGE NEXT_PUBLIC_BANNER_VIDEO NEXT_PUBLIC_BANNER_VIDEO_MOBILE NEXT_PUBLIC_BANNER_IMAGE_MOBILE NEXT_PUBLIC_MOBILE_APP_iMAGE NEXT_PUBLIC_PLAYSTORE_URL NEXT_PUBLIC_COMPANYADDRESS1 NEXT_PUBLIC_COMPANYADDRESS2 "
+            );
+            let status = data.length > 0;
 
             res.status(200).json({
                 status: status,
@@ -160,7 +232,6 @@ module.exports = {
 
     deleteInitialData: async (req, res) => {
         try {
-           
             const configId = req.params.id;
 
             if (!configId) {
@@ -202,20 +273,20 @@ module.exports = {
         try {
             // const configId = req.params.id; // Assuming you're passing the config ID in the URL parameter
             const updateFields = req.body;
-    
+
             // Check if the config data exists
-            const configData = await ConfigData.findOne({CHECK:1})
+            const configData = await ConfigData.findOne({ CHECK: 1 });
             if (!configData) {
                 return res.status(404).json({ message: "Configuration not found" });
             }
-    
+
             // Update the config data fields
             for (const key in updateFields) {
                 if (Object.hasOwnProperty.call(updateFields, key)) {
                     configData[key] = updateFields[key];
                 }
             }
-    
+
             // Handle file uploads if any
             if (req.files) {
                 if (req.files["COMPANY_LOGO"]) {
@@ -225,7 +296,7 @@ module.exports = {
                     configData.FAV_IMAGE = req.files["FAV_IMAGE"][0].path;
                 }
             }
-    
+
             // Save the updated config data
             await configData.save();
             writeDataToFile(configData);
@@ -237,5 +308,5 @@ module.exports = {
         } catch (err) {
             sendErrorResponse(res, 500, err);
         }
-    }
+    },
 };

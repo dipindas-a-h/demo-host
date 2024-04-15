@@ -3,10 +3,16 @@
     "JWT_SECRET": "2b53d4c4deea138f57a772b9f4d0e24a",
     "COMPANY_NAME": " travellers Choice",
     "COMPANY_REGISTRATION_NAME": " Travellers Choice Travel And Tourism LLC",
-    "COMPANY_LOGO": "public/images/initial/COMPANY_LOGO-1713155998513-230094353.jpg",
+    "COMPANY_LOGO": "public/images/initial/COMPANY_LOGO-1713176395620-663605150.jpg",
     "FAV_IMAGE": "public/images/initial/FAV_IMAGE-1713155970775-551066881.png",
     "COMPANY_SHORT_NAME": "TC",
     "CHECK": 1,
     "__v": 0,
-    "FLIGHT_SERVER_URL": "http://localhost:8080"
+    "FLIGHT_SERVER_URL": "http://localhost:8080",
+    "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME": "dwi7o19nn",
+    "CLOUDINARY_API_KEY": "549144472596919",
+    "CLOUDINARY_API_SECRET": "AnNiPOszr1R0YCelomUmi9IyuBM",
+    "CLOUDINARY_FOLDER": "test",
+    "GOOGLE_CLIENT_ID": "737966766304-7pbqb9r7gmmkjss0idruel9siep54v2p.apps.googleusercontent.com",
+    "GOOGLE_CLIENT_SECRET": "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"
 }

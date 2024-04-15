@@ -1,8 +1,6 @@
-const configRouter = require('express').Router();
+const configRouter = require("express").Router();
 const multer = require("multer");
 const path = require("path");
-
-
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,21 +31,25 @@ const upload = multer({
     { name: "COMPANY_LOGO", maxCount: 1 },
 ]);
 
-const {createInitialData,getInitialData,deleteInitialData,clearInitialData,updateInitialData,getCompanyData} = require('../../controllers/initial/initialController');
-const { adminAuth } = require('../../admin/middlewares');
-configRouter.post ('/',upload,createInitialData)
-configRouter.get ('/',getInitialData)
-configRouter.delete ('/',clearInitialData)
-
-configRouter.use(adminAuth)
-configRouter.delete ('/:id',deleteInitialData)
-configRouter.patch ('/',upload,updateInitialData)
-configRouter.get ('/company',getCompanyData)
-
-
-
+const {
+    createInitialData,
+    getInitialData,
+    deleteInitialData,
+    clearInitialData,
+    updateInitialData,
+    getCompanyData,
+    getRequiredData,
+} = require("../../controllers/initial/initialController");
+const { adminAuth } = require("../../admin/middlewares");
+configRouter.post("/", upload, createInitialData);
+configRouter.get("/", getInitialData);
+configRouter.delete("/", clearInitialData);
+configRouter.get('/b2b',getRequiredData)                          
+configRouter.use(adminAuth);
+configRouter.delete("/:id", deleteInitialData);
+configRouter.patch("/", upload, updateInitialData);
+configRouter.get("/company", getCompanyData);
 
 // configRouter.post ('/',()=> console.log('datas'))
 
-
-module.exports = configRouter
+module.exports = configRouter;
