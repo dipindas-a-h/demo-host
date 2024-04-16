@@ -29,6 +29,18 @@ const upload = multer({
 }).fields([
     { name: "FAV_IMAGE", maxCount: 1 },
     { name: "COMPANY_LOGO", maxCount: 1 },
+    { name: 'NEXT_PUBLIC_COMPANY_LOGO', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_COMPANY_FAVICON', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_BANNER_IMAGE', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_BANNER_VIDEO', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_BANNER_VIDEO_MOBILE', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_BANNER_IMAGE_MOBILE', maxCount: 1 },
+    { name: 'NEXT_PUBLIC_MOBILE_APP_IMAGE', maxCount: 1 },
+    { name: 'B2C_MOBILE_APP_IMAGE', maxCount: 1 },
+    { name: 'B2C_COMPANY_LOGO', maxCount: 1 },
+    { name: 'B2C_COMPANY_FAVICON', maxCount: 1 },
+    { name: 'B2C_LOGIN_BANNER', maxCount: 1 },
+    { name: 'B2C_SIGNUP_BANNER', maxCount: 1 },
 ]);
 
 const {
@@ -39,12 +51,15 @@ const {
     updateInitialData,
     getCompanyData,
     getRequiredData,
+    getB2cData
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
 configRouter.post("/", upload, createInitialData);
 configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
-configRouter.get('/b2b',getRequiredData)                          
+configRouter.get('/b2b',getRequiredData)   
+configRouter.get('/b2c',getB2cData)                          
+                      
 configRouter.use(adminAuth);
 configRouter.delete("/:id", deleteInitialData);
 configRouter.patch("/", upload, updateInitialData);
