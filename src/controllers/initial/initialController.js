@@ -134,6 +134,14 @@ module.exports = {
                     .json({ message: `Required fields are missing: COMPANY_SHORT_NAME` });
             }
 
+            const existingConfig = await ConfigData.find({})
+
+            if(existingConfig?.length){
+                return res.status(400).json({
+                    message: `Configuration data is already exists`,
+                });
+            }
+
             const newConfigData = new ConfigData({
                 PRODUCTION,
                 JWT_SECRET: "2b53d4c4deea138f57a772b9f4d0e24a",
@@ -251,7 +259,7 @@ module.exports = {
 
     getInitialData: async (req, res) => {
         try {
-            let data = await ConfigData.find({});
+            let data = await ConfigData.find({},"COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO");
             let status = data.length > 0;
 
             res.status(200).json({
