@@ -72,33 +72,33 @@ module.exports = {
                 NEXT_PUBLIC_PLAYSTORE_URL,
                 NEXT_PUBLIC_COMPANYADDRESS1,
                 NEXT_PUBLIC_COMPANYADDRESS2,
-                B2C_SERVER_URL,
-                B2C_CLIENT_URL,
-                B2C_MAP_API_KEY,
-                B2C_TITLE_NAME,
-                B2C_TITLE_SHORT_NAME,
-                B2C_COMPANY_SHORT_CODE,
-                B2C_COMPANY_B2B_URL,
-                B2C_COMPANY_EMAIL,
-                B2C_FACEBOOK_URL,
-                B2C_INSTAGRAM_URL,
-                // B2C_MOBILE_APP_IMAGE,
-                B2C_PLAYSTORE_URL,
-                B2C_COMPANY_CONTACT_NUMBER_ONE,
-                B2C_COMPANY_CONTACT_NUMBER_TWO,
-                B2C_COMPANY_WHATSAPP_NUMBER,
-                // B2C_COMPANY_LOGO,
-                // B2C_COMPANY_FAVICON,
-                // B2C_LOGIN_BANNER,
-                // B2C_SIGNUP_BANNER,
-                B2C_IS_API_INTEGRATED,
-                B2C_API_INTEGRATION_URL,
-                B2C_CONTACTUS_EMAIL,
-                B2C_ENQUIRY_EMAIL,
-                B2C_COMPANY_ADDRESS,
-                B2C_COMPANY_CITY,
-                B2C_COMPANY_PINCODE,
-                B2C_COMAPNY_COUNTRY,
+                B2B_SERVER_URL,
+                B2B_CLIENT_URL,
+                B2B_MAP_API_KEY,
+                B2B_TITLE_NAME,
+                B2B_TITLE_SHORT_NAME,
+                B2B_COMPANY_SHORT_CODE,
+                B2B_COMPANY_B2B_URL,
+                B2B_COMPANY_EMAIL,
+                B2B_FACEBOOK_URL,
+                B2B_INSTAGRAM_URL,
+                // B2B_MOBILE_APP_IMAGE,
+                B2B_PLAYSTORE_URL,
+                B2B_COMPANY_CONTACT_NUMBER_ONE,
+                B2B_COMPANY_CONTACT_NUMBER_TWO,
+                B2B_COMPANY_WHATSAPP_NUMBER,
+                // B2B_COMPANY_LOGO,
+                // B2B_COMPANY_FAVICON,
+                // B2B_LOGIN_BANNER,
+                // B2B_SIGNUP_BANNER,
+                B2B_IS_API_INTEGRATED,
+                B2B_API_INTEGRATION_URL,
+                B2B_CONTACTUS_EMAIL,
+                B2B_ENQUIRY_EMAIL,
+                B2B_COMPANY_ADDRESS,
+                B2B_COMPANY_CITY,
+                B2B_COMPANY_PINCODE,
+                B2B_COMAPNY_COUNTRY,
             } = req.body;
             console.log("da", req?.files);
             const companyLogoPath = req.files["COMPANY_LOGO"]
@@ -126,20 +126,20 @@ module.exports = {
             const nextPublicMobileAppImagePath = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"]
                 ? req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path
                 : null;
-            const b2cMobileAppImagePath = req.files["B2C_MOBILE_APP_IMAGE"]
-                ? req.files["B2C_MOBILE_APP_IMAGE"][0].path
+            const b2bMobileAppImagePath = req.files["B2B_MOBILE_APP_IMAGE"]
+                ? req.files["B2B_MOBILE_APP_IMAGE"][0].path
                 : null;
-            const b2cCompanyLogoPath = req.files["B2C_COMPANY_LOGO"]
-                ? req.files["B2C_COMPANY_LOGO"][0].path
+            const b2bCompanyLogoPath = req.files["B2B_COMPANY_LOGO"]
+                ? req.files["B2B_COMPANY_LOGO"][0].path
                 : null;
-            const b2cCompanyFavIconPath = req.files["B2C_COMPANY_FAVICON"]
-                ? req.files["B2C_COMPANY_FAVICON"][0].path
+            const b2bCompanyFavIconPath = req.files["B2B_COMPANY_FAVICON"]
+                ? req.files["B2B_COMPANY_FAVICON"][0].path
                 : null;
-            const b2cLoginBannerPath = req.files["B2C_LOGIN_BANNER"]
-                ? req.files["B2C_LOGIN_BANNER"][0].path
+            const b2bLoginBannerPath = req.files["B2B_LOGIN_BANNER"]
+                ? req.files["B2B_LOGIN_BANNER"][0].path
                 : null;
-            const b2cSignUpBannerPath = req.files["B2C_SIGNUP_BANNER"]
-                ? req.files["B2C_SIGNUP_BANNER"][0].path
+            const b2bSignUpBannerPath = req.files["B2B_SIGNUP_BANNER"]
+                ? req.files["B2B_SIGNUP_BANNER"][0].path
                 : null;
 
             if (!companyLogoPath) {
@@ -236,33 +236,33 @@ module.exports = {
                 NEXT_PUBLIC_PLAYSTORE_URL,
                 NEXT_PUBLIC_COMPANYADDRESS1,
                 NEXT_PUBLIC_COMPANYADDRESS2,
-                B2C_SERVER_URL,
-                B2C_CLIENT_URL,
-                B2C_MAP_API_KEY,
-                B2C_TITLE_NAME,
-                B2C_TITLE_SHORT_NAME,
-                B2C_COMPANY_SHORT_CODE,
-                B2C_COMPANY_B2B_URL,
-                B2C_COMPANY_EMAIL,
-                B2C_FACEBOOK_URL,
-                B2C_INSTAGRAM_URL,
-                B2C_MOBILE_APP_IMAGE: b2cMobileAppImagePath,
-                B2C_PLAYSTORE_URL,
-                B2C_COMPANY_CONTACT_NUMBER_ONE,
-                B2C_COMPANY_CONTACT_NUMBER_TWO,
-                B2C_COMPANY_WHATSAPP_NUMBER,
-                B2C_COMPANY_LOGO: b2cCompanyLogoPath,
-                B2C_COMPANY_FAVICON: b2cCompanyFavIconPath,
-                B2C_LOGIN_BANNER: b2cLoginBannerPath,
-                B2C_SIGNUP_BANNER: b2cSignUpBannerPath,
-                B2C_IS_API_INTEGRATED,
-                B2C_API_INTEGRATION_URL,
-                B2C_CONTACTUS_EMAIL,
-                B2C_ENQUIRY_EMAIL,
-                B2C_COMPANY_ADDRESS,
-                B2C_COMPANY_CITY,
-                B2C_COMPANY_PINCODE,
-                B2C_COMAPNY_COUNTRY,
+                B2B_SERVER_URL,
+                B2B_CLIENT_URL,
+                B2B_MAP_API_KEY,
+                B2B_TITLE_NAME,
+                B2B_TITLE_SHORT_NAME,
+                B2B_COMPANY_SHORT_CODE,
+                B2B_COMPANY_B2B_URL,
+                B2B_COMPANY_EMAIL,
+                B2B_FACEBOOK_URL,
+                B2B_INSTAGRAM_URL,
+                B2B_MOBILE_APP_IMAGE: b2bMobileAppImagePath,
+                B2B_PLAYSTORE_URL,
+                B2B_COMPANY_CONTACT_NUMBER_ONE,
+                B2B_COMPANY_CONTACT_NUMBER_TWO,
+                B2B_COMPANY_WHATSAPP_NUMBER,
+                B2B_COMPANY_LOGO: b2bCompanyLogoPath,
+                B2B_COMPANY_FAVICON: b2bCompanyFavIconPath,
+                B2B_LOGIN_BANNER: b2bLoginBannerPath,
+                B2B_SIGNUP_BANNER: b2bSignUpBannerPath,
+                B2B_IS_API_INTEGRATED,
+                B2B_API_INTEGRATION_URL,
+                B2B_CONTACTUS_EMAIL,
+                B2B_ENQUIRY_EMAIL,
+                B2B_COMPANY_ADDRESS,
+                B2B_COMPANY_CITY,
+                B2B_COMPANY_PINCODE,
+                B2B_COMAPNY_COUNTRY,
             });
 
             await newConfigData.save();
@@ -333,11 +333,11 @@ module.exports = {
         }
     },
 
-    getB2cData: async (req, res) => {
+    getB2BData: async (req, res) => {
         try {
             let data = await ConfigData.find(
                 {},
-                "  B2C_SERVER_URL B2C_CLIENT_URL B2C_MAP_API_KEY B2C_TITLE_NAME B2C_TITLE_SHORT_NAME B2C_COMPANY_SHORT_CODE B2C_COMPANY_B2B_URL B2C_COMPANY_EMAIL B2C_FACEBOOK_URL B2C_INSTAGRAM_URL B2C_MOBILE_APP_IMAGE B2C_PLAYSTORE_URL B2C_COMPANY_CONTACT_NUMBER_ONE B2C_COMPANY_CONTACT_NUMBER_TWO B2C_COMPANY_WHATSAPP_NUMBER B2C_COMPANY_LOGO B2C_COMPANY_FAVICON B2C_LOGIN_BANNER B2C_SIGNUP_BANNER B2C_IS_API_INTEGRATED B2C_API_INTEGRATION_URL B2C_CONTACTUS_EMAIL B2C_ENQUIRY_EMAIL B2C_COMPANY_ADDRESS B2C_COMPANY_CITY B2C_COMPANY_PINCODE B2C_COMAPNY_COUNTRY"
+                "  B2B_SERVER_URL B2B_CLIENT_URL B2B_MAP_API_KEY B2B_TITLE_NAME B2B_TITLE_SHORT_NAME B2B_COMPANY_SHORT_CODE B2B_COMPANY_B2B_URL B2B_COMPANY_EMAIL B2B_FACEBOOK_URL B2B_INSTAGRAM_URL B2B_MOBILE_APP_IMAGE B2B_PLAYSTORE_URL B2B_COMPANY_CONTACT_NUMBER_ONE B2B_COMPANY_CONTACT_NUMBER_TWO B2B_COMPANY_WHATSAPP_NUMBER B2B_COMPANY_LOGO B2B_COMPANY_FAVICON B2B_LOGIN_BANNER B2B_SIGNUP_BANNER B2B_IS_API_INTEGRATED B2B_API_INTEGRATION_URL B2B_CONTACTUS_EMAIL B2B_ENQUIRY_EMAIL B2B_COMPANY_ADDRESS B2B_COMPANY_CITY B2B_COMPANY_PINCODE B2B_COMAPNY_COUNTRY"
             );
             let status = data.length > 0;
 
@@ -395,7 +395,7 @@ module.exports = {
             const updateFields = req.body;
 
             // Check if the config data exists
-            const configData = await ConfigData.findOne({ CHECK: 1 });
+            const configData  = await ConfigData.findOne({ CHECK: 1 });
             if (!configData) {
                 return res.status(404).json({ message: "Configuration not found" });
             }
@@ -436,20 +436,20 @@ module.exports = {
                 if (req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"]) {
                     configData.NEXT_PUBLIC_MOBILE_APP_IMAGE = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path;
                 }
-                if (req.files["B2C_MOBILE_APP_IMAGE"]) {
-                    configData.B2C_MOBILE_APP_IMAGE = req.files["B2C_MOBILE_APP_IMAGE"][0].path;
+                if (req.files["B2B_MOBILE_APP_IMAGE"]) {
+                    configData.B2B_MOBILE_APP_IMAGE = req.files["B2B_MOBILE_APP_IMAGE"][0].path;
                 }
-                if (req.files["B2C_COMPANY_LOGO"]) {
-                    configData.B2C_COMPANY_LOGO = req.files["B2C_COMPANY_LOGO"][0].path;
+                if (req.files["B2B_COMPANY_LOGO"]) {
+                    configData.B2B_COMPANY_LOGO = req.files["B2B_COMPANY_LOGO"][0].path;
                 }
-                if (req.files["B2C_COMPANY_FAVICON"]) {
-                    configData.B2C_COMPANY_FAVICON = req.files["B2C_COMPANY_FAVICON"][0].path;
+                if (req.files["B2B_COMPANY_FAVICON"]) {
+                    configData.B2B_COMPANY_FAVICON = req.files["B2B_COMPANY_FAVICON"][0].path;
                 }
-                if (req.files["B2C_LOGIN_BANNER"]) {
-                    configData.B2C_LOGIN_BANNER = req.files["B2C_LOGIN_BANNER"][0].path;
+                if (req.files["B2B_LOGIN_BANNER"]) {
+                    configData.B2B_LOGIN_BANNER = req.files["B2B_LOGIN_BANNER"][0].path;
                 }
-                if (req.files["B2C_SIGNUP_BANNER"]) {
-                    configData.B2C_SIGNUP_BANNER = req.files["B2C_SIGNUP_BANNER"][0].path;
+                if (req.files["B2B_SIGNUP_BANNER"]) {
+                    configData.B2B_SIGNUP_BANNER = req.files["B2B_SIGNUP_BANNER"][0].path;
                 }
             
             }
