@@ -98,25 +98,49 @@ module.exports = {
                 B2C_COMPANY_ADDRESS,
                 B2C_COMPANY_CITY,
                 B2C_COMPANY_PINCODE,
-                B2C_COMAPNY_COUNTRY
+                B2C_COMAPNY_COUNTRY,
             } = req.body;
-            console.log('da',req?.files)
+            console.log("da", req?.files);
             const companyLogoPath = req.files["COMPANY_LOGO"]
                 ? req.files["COMPANY_LOGO"][0].path
                 : null;
             const favImagePath = req.files["FAV_IMAGE"] ? req.files["FAV_IMAGE"][0].path : null;
-            const nextPublicCompanyLogoPath = req.files["NEXT_PUBLIC_COMPANY_LOGO"] ? req.files["NEXT_PUBLIC_COMPANY_LOGO"][0].path : null;
-            const nextPublicCompanyFavIconPath = req.files["NEXT_PUBLIC_COMPANY_FAVICON"] ? req.files["NEXT_PUBLIC_COMPANY_FAVICON"][0].path : null;
-            const nextPublicBannerImagePath = req.files["NEXT_PUBLIC_BANNER_IMAGE"] ? req.files["NEXT_PUBLIC_BANNER_IMAGE"][0].path : null;
-            const nextPublicBannerVideoPath = req.files["NEXT_PUBLIC_BANNER_VIDEO"] ? req.files["NEXT_PUBLIC_BANNER_VIDEO"][0].path : null;
-            const nextPublicBannerVideoMobilePath = req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"] ? req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"][0].path : null;
-            const nextPublicBannerImageMobilePath = req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"] ? req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"][0].path : null;
-            const nextPublicMobileAppImagePath = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"] ? req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path : null;
-            const b2cMobileAppImagePath = req.files["B2C_MOBILE_APP_IMAGE"] ? req.files["B2C_MOBILE_APP_IMAGE"][0].path : null;
-            const b2cCompanyLogoPath = req.files["B2C_COMPANY_LOGO"] ? req.files["B2C_COMPANY_LOGO"][0].path : null;
-            const b2cCompanyFavIconPath = req.files["B2C_COMPANY_FAVICON"] ? req.files["B2C_COMPANY_FAVICON"][0].path : null;
-            const b2cLoginBannerPath = req.files["B2C_LOGIN_BANNER"] ? req.files["B2C_LOGIN_BANNER"][0].path : null;
-            const b2cSignUpBannerPath = req.files["B2C_SIGNUP_BANNER"] ? req.files["B2C_SIGNUP_BANNER"][0].path : null;
+            const nextPublicCompanyLogoPath = req.files["NEXT_PUBLIC_COMPANY_LOGO"]
+                ? req.files["NEXT_PUBLIC_COMPANY_LOGO"][0].path
+                : null;
+            const nextPublicCompanyFavIconPath = req.files["NEXT_PUBLIC_COMPANY_FAVICON"]
+                ? req.files["NEXT_PUBLIC_COMPANY_FAVICON"][0].path
+                : null;
+            const nextPublicBannerImagePath = req.files["NEXT_PUBLIC_BANNER_IMAGE"]
+                ? req.files["NEXT_PUBLIC_BANNER_IMAGE"][0].path
+                : null;
+            const nextPublicBannerVideoPath = req.files["NEXT_PUBLIC_BANNER_VIDEO"]
+                ? req.files["NEXT_PUBLIC_BANNER_VIDEO"][0].path
+                : null;
+            const nextPublicBannerVideoMobilePath = req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"]
+                ? req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"][0].path
+                : null;
+            const nextPublicBannerImageMobilePath = req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"]
+                ? req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"][0].path
+                : null;
+            const nextPublicMobileAppImagePath = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"]
+                ? req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path
+                : null;
+            const b2cMobileAppImagePath = req.files["B2C_MOBILE_APP_IMAGE"]
+                ? req.files["B2C_MOBILE_APP_IMAGE"][0].path
+                : null;
+            const b2cCompanyLogoPath = req.files["B2C_COMPANY_LOGO"]
+                ? req.files["B2C_COMPANY_LOGO"][0].path
+                : null;
+            const b2cCompanyFavIconPath = req.files["B2C_COMPANY_FAVICON"]
+                ? req.files["B2C_COMPANY_FAVICON"][0].path
+                : null;
+            const b2cLoginBannerPath = req.files["B2C_LOGIN_BANNER"]
+                ? req.files["B2C_LOGIN_BANNER"][0].path
+                : null;
+            const b2cSignUpBannerPath = req.files["B2C_SIGNUP_BANNER"]
+                ? req.files["B2C_SIGNUP_BANNER"][0].path
+                : null;
 
             if (!companyLogoPath) {
                 return res
@@ -134,9 +158,9 @@ module.exports = {
                     .json({ message: `Required fields are missing: COMPANY_SHORT_NAME` });
             }
 
-            const existingConfig = await ConfigData.find({})
+            const existingConfig = await ConfigData.find({});
 
-            if(existingConfig?.length){
+            if (existingConfig?.length) {
                 return res.status(400).json({
                     message: `Configuration data is already exists`,
                 });
@@ -202,13 +226,13 @@ module.exports = {
                 NEXT_PUBLIC_TITLE_NAME,
                 NEXT_PUBLIC_TITLE_SHORT_NAME,
                 NEXT_PUBLIC_TITLE_SHORT_CODE,
-                NEXT_PUBLIC_COMPANY_LOGO : nextPublicCompanyLogoPath,
-                NEXT_PUBLIC_COMPANY_FAVICON : nextPublicCompanyFavIconPath,
-                NEXT_PUBLIC_BANNER_IMAGE : nextPublicBannerImagePath,
-                NEXT_PUBLIC_BANNER_VIDEO : nextPublicBannerVideoPath,
-                NEXT_PUBLIC_BANNER_VIDEO_MOBILE : nextPublicBannerVideoMobilePath,
-                NEXT_PUBLIC_BANNER_IMAGE_MOBILE : nextPublicBannerImageMobilePath,
-                NEXT_PUBLIC_MOBILE_APP_IMAGE : nextPublicMobileAppImagePath,
+                NEXT_PUBLIC_COMPANY_LOGO: nextPublicCompanyLogoPath,
+                NEXT_PUBLIC_COMPANY_FAVICON: nextPublicCompanyFavIconPath,
+                NEXT_PUBLIC_BANNER_IMAGE: nextPublicBannerImagePath,
+                NEXT_PUBLIC_BANNER_VIDEO: nextPublicBannerVideoPath,
+                NEXT_PUBLIC_BANNER_VIDEO_MOBILE: nextPublicBannerVideoMobilePath,
+                NEXT_PUBLIC_BANNER_IMAGE_MOBILE: nextPublicBannerImageMobilePath,
+                NEXT_PUBLIC_MOBILE_APP_IMAGE: nextPublicMobileAppImagePath,
                 NEXT_PUBLIC_PLAYSTORE_URL,
                 NEXT_PUBLIC_COMPANYADDRESS1,
                 NEXT_PUBLIC_COMPANYADDRESS2,
@@ -222,15 +246,15 @@ module.exports = {
                 B2C_COMPANY_EMAIL,
                 B2C_FACEBOOK_URL,
                 B2C_INSTAGRAM_URL,
-                B2C_MOBILE_APP_IMAGE : b2cMobileAppImagePath,
+                B2C_MOBILE_APP_IMAGE: b2cMobileAppImagePath,
                 B2C_PLAYSTORE_URL,
                 B2C_COMPANY_CONTACT_NUMBER_ONE,
                 B2C_COMPANY_CONTACT_NUMBER_TWO,
                 B2C_COMPANY_WHATSAPP_NUMBER,
-                B2C_COMPANY_LOGO : b2cCompanyLogoPath,
-                B2C_COMPANY_FAVICON : b2cCompanyFavIconPath,
-                B2C_LOGIN_BANNER : b2cLoginBannerPath,
-                B2C_SIGNUP_BANNER : b2cSignUpBannerPath,
+                B2C_COMPANY_LOGO: b2cCompanyLogoPath,
+                B2C_COMPANY_FAVICON: b2cCompanyFavIconPath,
+                B2C_LOGIN_BANNER: b2cLoginBannerPath,
+                B2C_SIGNUP_BANNER: b2cSignUpBannerPath,
                 B2C_IS_API_INTEGRATED,
                 B2C_API_INTEGRATION_URL,
                 B2C_CONTACTUS_EMAIL,
@@ -238,7 +262,7 @@ module.exports = {
                 B2C_COMPANY_ADDRESS,
                 B2C_COMPANY_CITY,
                 B2C_COMPANY_PINCODE,
-                B2C_COMAPNY_COUNTRY
+                B2C_COMAPNY_COUNTRY,
             });
 
             await newConfigData.save();
@@ -259,7 +283,10 @@ module.exports = {
 
     getInitialData: async (req, res) => {
         try {
-            let data = await ConfigData.find({},"COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO");
+            let data = await ConfigData.find(
+                {},
+                "COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO"
+            );
             let status = data.length > 0;
 
             res.status(200).json({
@@ -273,10 +300,11 @@ module.exports = {
 
     getCompanyData: async (req, res) => {
         try {
-            let data = await ConfigData.find(
-                {},
-                "COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO"
-            );
+            // let data = await ConfigData.find(
+            //     {},
+            //     "COMPANY_SHORT_NAME FAV_IMAGE COMPANY_NAME COMPANY_LOGO"
+            // );
+            let data = await ConfigData.find({});
             let status = data.length > 0;
 
             res.status(200).json({
