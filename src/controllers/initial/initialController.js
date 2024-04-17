@@ -415,6 +415,43 @@ module.exports = {
                 if (req.files["FAV_IMAGE"]) {
                     configData.FAV_IMAGE = req.files["FAV_IMAGE"][0].path;
                 }
+                if (req.files["NEXT_PUBLIC_COMPANY_LOGO"]) {
+                    configData.NEXT_PUBLIC_COMPANY_LOGO = req.files["NEXT_PUBLIC_COMPANY_LOGO"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_COMPANY_FAVICON"]) {
+                    configData.NEXT_PUBLIC_COMPANY_FAVICON = req.files["NEXT_PUBLIC_COMPANY_FAVICON"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_BANNER_IMAGE"]) {
+                    configData.NEXT_PUBLIC_BANNER_IMAGE = req.files["NEXT_PUBLIC_BANNER_IMAGE"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_BANNER_VIDEO"]) {
+                    configData.NEXT_PUBLIC_BANNER_VIDEO = req.files["NEXT_PUBLIC_BANNER_VIDEO"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"]) {
+                    configData.NEXT_PUBLIC_BANNER_VIDEO_MOBILE = req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"]) {
+                    configData.NEXT_PUBLIC_BANNER_IMAGE_MOBILE = req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"][0].path;
+                }
+                if (req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"]) {
+                    configData.NEXT_PUBLIC_MOBILE_APP_IMAGE = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path;
+                }
+                if (req.files["B2C_MOBILE_APP_IMAGE"]) {
+                    configData.B2C_MOBILE_APP_IMAGE = req.files["B2C_MOBILE_APP_IMAGE"][0].path;
+                }
+                if (req.files["B2C_COMPANY_LOGO"]) {
+                    configData.B2C_COMPANY_LOGO = req.files["B2C_COMPANY_LOGO"][0].path;
+                }
+                if (req.files["B2C_COMPANY_FAVICON"]) {
+                    configData.B2C_COMPANY_FAVICON = req.files["B2C_COMPANY_FAVICON"][0].path;
+                }
+                if (req.files["B2C_LOGIN_BANNER"]) {
+                    configData.B2C_LOGIN_BANNER = req.files["B2C_LOGIN_BANNER"][0].path;
+                }
+                if (req.files["B2C_SIGNUP_BANNER"]) {
+                    configData.B2C_SIGNUP_BANNER = req.files["B2C_SIGNUP_BANNER"][0].path;
+                }
+            
             }
 
             // Save the updated config data
