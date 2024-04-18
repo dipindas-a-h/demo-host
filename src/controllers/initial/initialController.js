@@ -322,11 +322,15 @@ module.exports = {
                 {},
                 " NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME CLOUDINARY_API_KEY CLOUDINARY_API_SECRET CLOUDINARY_FOLDER GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET NEXTAUTH_SECRET NEXTAUTH_URL NEXT_PUBLIC_GOOGLE_ANALYTIC_ID NEXT_PUBLIC_TABBY_PUBLIC_KEY NEXT_PUBLIC_TABBY_MERCHANT_CODE NEXT_PUBLIC_TOURS_URL NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_CLIENT_URL NEXT_PUBLIC_CDN_URL NEXT_PUBLIC_TITLE_NAME NEXT_PUBLIC_TITLE_SHORT_NAME NEXT_PUBLIC_TITLE_SHORT_CODE NEXT_PUBLIC_COMPANY_LOGO NEXT_PUBLIC_COMPANY_FAVICON NEXT_PUBLIC_BANNER_IMAGE NEXT_PUBLIC_BANNER_VIDEO NEXT_PUBLIC_BANNER_VIDEO_MOBILE NEXT_PUBLIC_BANNER_IMAGE_MOBILE NEXT_PUBLIC_MOBILE_APP_iMAGE NEXT_PUBLIC_PLAYSTORE_URL NEXT_PUBLIC_COMPANYADDRESS1 NEXT_PUBLIC_COMPANYADDRESS2 "
             );
+    
             let status = data.length > 0;
-
+    
+            // Transforming array to object
+            let transformedData = data.length > 0 ? data[0] : {};
+    
             res.status(200).json({
                 status: status,
-                data: data,
+                data: transformedData,
             });
         } catch (err) {
             sendErrorResponse(res, 500, err);
@@ -343,7 +347,7 @@ module.exports = {
 
             res.status(200).json({
                 status: status,
-                data: data,
+                data: data[0],
             });
         } catch (err) {
             sendErrorResponse(res, 500, err);
