@@ -60,7 +60,7 @@ configRouter.delete("/", clearInitialData);
 configRouter.get('/b2c',getRequiredData)   
 configRouter.get('/b2b',getB2BData)                          
                       
-// configRouter.use(adminAuth);
+configRouter.use(adminAuth);
 configRouter.delete("/:id", deleteInitialData);
 configRouter.patch("/", upload, updateInitialData);
 configRouter.get("/company", getCompanyData);
