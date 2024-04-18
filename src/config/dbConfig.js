@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 // const mongoUrl = process.env.MONGODB_URL;
 const mongoUrl = `mongodb://localhost:27017`;
+mongoose.set('strictQuery', false);
 
 const connectMonogdb = async () => {
     try {
-        mongoose.set('strictQuery', false);
         console.log(mongoUrl, "mongoUrl");
         await mongoose.connect(mongoUrl, {
             useNewUrlParser: true,
