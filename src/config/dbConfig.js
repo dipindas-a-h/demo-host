@@ -5,6 +5,7 @@ const mongoUrl = `mongodb://localhost:27017`;
 
 const connectMonogdb = async () => {
     try {
+        mongoose.set('strictQuery', false);
         console.log(mongoUrl, "mongoUrl");
         await mongoose.connect(mongoUrl, {
             useNewUrlParser: true,
