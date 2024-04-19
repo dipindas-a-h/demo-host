@@ -63,6 +63,11 @@ app.use(
     })
 );
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+    res.setHeader('Referrer-Policy', 'no-referrer-when-downgrade');
+    next();
+  });
 app.use(cookieParser());
 app.use("/public", express.static("public"));
 app.use('/initial',configRouter)
