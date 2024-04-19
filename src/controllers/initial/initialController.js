@@ -1,5 +1,6 @@
 const { sendErrorResponse } = require("../../helpers");
 const ConfigData = require("../../models/initial/config.model");
+const Test = require("../../models/test.model");
 const { saveDataToFile, writeDataToFile, readDataFromFile } = require("./SaveDataFile");
 
 module.exports = {
@@ -470,4 +471,20 @@ module.exports = {
             sendErrorResponse(res, 500, err);
         }
     },
-};
+    testData: async (req, res) => {
+        try {
+          const{name,email} = req?.body;
+          const dta = new Test({
+            name,
+            email,
+          })
+
+          await dta.save();
+          res.status(201).json({
+            message: "test Created",
+           data:dta,
+        });
+        } catch (err) {
+            sendErrorResponse(res, 500, err);
+        }
+    },};

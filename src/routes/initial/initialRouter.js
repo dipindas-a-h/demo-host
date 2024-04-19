@@ -52,6 +52,7 @@ const {
     getCompanyData,
     getRequiredData,
     getB2BData,
+    testData
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
 configRouter.post("/", upload, createInitialData);
@@ -59,15 +60,7 @@ configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
 configRouter.get("/b2c", getRequiredData);
 configRouter.get("/b2b", getB2BData);
-configRouter.post("/test", (req, res) => {
-    const {msg} = req.body;
-    console.log(msg);
-
-    res.status(201).json({
-        message: "test check",
-       msg
-    });
-});
+configRouter.post("/test",testData);
 
 configRouter.use(adminAuth);
 configRouter.delete("/:id", deleteInitialData);
