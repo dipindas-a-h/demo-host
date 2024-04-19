@@ -323,12 +323,12 @@ module.exports = {
                 {},
                 " NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME CLOUDINARY_API_KEY CLOUDINARY_API_SECRET CLOUDINARY_FOLDER GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET NEXTAUTH_SECRET NEXTAUTH_URL NEXT_PUBLIC_GOOGLE_ANALYTIC_ID NEXT_PUBLIC_TABBY_PUBLIC_KEY NEXT_PUBLIC_TABBY_MERCHANT_CODE NEXT_PUBLIC_TOURS_URL NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_CLIENT_URL NEXT_PUBLIC_CDN_URL NEXT_PUBLIC_TITLE_NAME NEXT_PUBLIC_TITLE_SHORT_NAME NEXT_PUBLIC_TITLE_SHORT_CODE NEXT_PUBLIC_COMPANY_LOGO NEXT_PUBLIC_COMPANY_FAVICON NEXT_PUBLIC_BANNER_IMAGE NEXT_PUBLIC_BANNER_VIDEO NEXT_PUBLIC_BANNER_VIDEO_MOBILE NEXT_PUBLIC_BANNER_IMAGE_MOBILE NEXT_PUBLIC_MOBILE_APP_iMAGE NEXT_PUBLIC_PLAYSTORE_URL NEXT_PUBLIC_COMPANYADDRESS1 NEXT_PUBLIC_COMPANYADDRESS2 "
             );
-    
+
             let status = data.length > 0;
-    
+
             // Transforming array to object
             let transformedData = data.length > 0 ? data[0] : {};
-    
+
             res.status(200).json({
                 status: status,
                 data: transformedData,
@@ -400,7 +400,7 @@ module.exports = {
             const updateFields = req.body;
 
             // Check if the config data exists
-            const configData  = await ConfigData.findOne({ CHECK: 1 });
+            const configData = await ConfigData.findOne({ CHECK: 1 });
             if (!configData) {
                 return res.status(404).json({ message: "Configuration not found" });
             }
@@ -421,25 +421,32 @@ module.exports = {
                     configData.FAV_IMAGE = req.files["FAV_IMAGE"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_COMPANY_LOGO"]) {
-                    configData.NEXT_PUBLIC_COMPANY_LOGO = req.files["NEXT_PUBLIC_COMPANY_LOGO"][0].path;
+                    configData.NEXT_PUBLIC_COMPANY_LOGO =
+                        req.files["NEXT_PUBLIC_COMPANY_LOGO"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_COMPANY_FAVICON"]) {
-                    configData.NEXT_PUBLIC_COMPANY_FAVICON = req.files["NEXT_PUBLIC_COMPANY_FAVICON"][0].path;
+                    configData.NEXT_PUBLIC_COMPANY_FAVICON =
+                        req.files["NEXT_PUBLIC_COMPANY_FAVICON"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_BANNER_IMAGE"]) {
-                    configData.NEXT_PUBLIC_BANNER_IMAGE = req.files["NEXT_PUBLIC_BANNER_IMAGE"][0].path;
+                    configData.NEXT_PUBLIC_BANNER_IMAGE =
+                        req.files["NEXT_PUBLIC_BANNER_IMAGE"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_BANNER_VIDEO"]) {
-                    configData.NEXT_PUBLIC_BANNER_VIDEO = req.files["NEXT_PUBLIC_BANNER_VIDEO"][0].path;
+                    configData.NEXT_PUBLIC_BANNER_VIDEO =
+                        req.files["NEXT_PUBLIC_BANNER_VIDEO"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"]) {
-                    configData.NEXT_PUBLIC_BANNER_VIDEO_MOBILE = req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"][0].path;
+                    configData.NEXT_PUBLIC_BANNER_VIDEO_MOBILE =
+                        req.files["NEXT_PUBLIC_BANNER_VIDEO_MOBILE"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"]) {
-                    configData.NEXT_PUBLIC_BANNER_IMAGE_MOBILE = req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"][0].path;
+                    configData.NEXT_PUBLIC_BANNER_IMAGE_MOBILE =
+                        req.files["NEXT_PUBLIC_BANNER_IMAGE_MOBILE"][0].path;
                 }
                 if (req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"]) {
-                    configData.NEXT_PUBLIC_MOBILE_APP_IMAGE = req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path;
+                    configData.NEXT_PUBLIC_MOBILE_APP_IMAGE =
+                        req.files["NEXT_PUBLIC_MOBILE_APP_IMAGE"][0].path;
                 }
                 if (req.files["B2B_MOBILE_APP_IMAGE"]) {
                     configData.B2B_MOBILE_APP_IMAGE = req.files["B2B_MOBILE_APP_IMAGE"][0].path;
@@ -456,7 +463,6 @@ module.exports = {
                 if (req.files["B2B_SIGNUP_BANNER"]) {
                     configData.B2B_SIGNUP_BANNER = req.files["B2B_SIGNUP_BANNER"][0].path;
                 }
-            
             }
 
             // Save the updated config data
@@ -473,18 +479,21 @@ module.exports = {
     },
     testData: async (req, res) => {
         try {
-          const{name,email} = req?.body;
-          const dta = new Test({
-            name,
-            email,
-          })
+            const { name, email } = req?.body;
+            const dta = new Test({
+                name,
+                email,
+            });
 
-          await dta.save();
-          res.status(201).json({
-            message: "test Created",
-           data:dta,
-        });
+            await dta.save();
+            console.log(dta);
+            res.status(201).json({
+                message: "test Created",
+                data: dta,
+            });
         } catch (err) {
+            console.log(err)
             sendErrorResponse(res, 500, err);
         }
-    },};
+    },
+};
