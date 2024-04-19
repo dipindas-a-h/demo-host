@@ -29,18 +29,18 @@ const upload = multer({
 }).fields([
     { name: "FAV_IMAGE", maxCount: 1 },
     { name: "COMPANY_LOGO", maxCount: 1 },
-    { name: 'NEXT_PUBLIC_COMPANY_LOGO', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_COMPANY_FAVICON', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_BANNER_IMAGE', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_BANNER_VIDEO', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_BANNER_VIDEO_MOBILE', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_BANNER_IMAGE_MOBILE', maxCount: 1 },
-    { name: 'NEXT_PUBLIC_MOBILE_APP_IMAGE', maxCount: 1 },
-    { name: 'B2B_MOBILE_APP_IMAGE', maxCount: 1 },
-    { name: 'B2B_COMPANY_LOGO', maxCount: 1 },
-    { name: 'B2B_COMPANY_FAVICON', maxCount: 1 },
-    { name: 'B2B_LOGIN_BANNER', maxCount: 1 },
-    { name: 'B2B_SIGNUP_BANNER', maxCount: 1 },
+    { name: "NEXT_PUBLIC_COMPANY_LOGO", maxCount: 1 },
+    { name: "NEXT_PUBLIC_COMPANY_FAVICON", maxCount: 1 },
+    { name: "NEXT_PUBLIC_BANNER_IMAGE", maxCount: 1 },
+    { name: "NEXT_PUBLIC_BANNER_VIDEO", maxCount: 1 },
+    { name: "NEXT_PUBLIC_BANNER_VIDEO_MOBILE", maxCount: 1 },
+    { name: "NEXT_PUBLIC_BANNER_IMAGE_MOBILE", maxCount: 1 },
+    { name: "NEXT_PUBLIC_MOBILE_APP_IMAGE", maxCount: 1 },
+    { name: "B2B_MOBILE_APP_IMAGE", maxCount: 1 },
+    { name: "B2B_COMPANY_LOGO", maxCount: 1 },
+    { name: "B2B_COMPANY_FAVICON", maxCount: 1 },
+    { name: "B2B_LOGIN_BANNER", maxCount: 1 },
+    { name: "B2B_SIGNUP_BANNER", maxCount: 1 },
 ]);
 
 const {
@@ -51,20 +51,27 @@ const {
     updateInitialData,
     getCompanyData,
     getRequiredData,
-    getB2BData
+    getB2BData,
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
 configRouter.post("/", upload, createInitialData);
 configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
-configRouter.get('/b2c',getRequiredData)   
-configRouter.get('/b2b',getB2BData)                          
-configRouter.get ('/test',(req,res)=> res.send('test success'))
-   
+configRouter.get("/b2c", getRequiredData);
+configRouter.get("/b2b", getB2BData);
+configRouter.post("/test", (req, res) => {
+    const {msg} = req.body;
+    console.log(msg);
+
+    res.status(201).json({
+        message: "test check",
+       msg
+    });
+});
+
 configRouter.use(adminAuth);
 configRouter.delete("/:id", deleteInitialData);
 configRouter.patch("/", upload, updateInitialData);
 configRouter.get("/company", getCompanyData);
-
 
 module.exports = configRouter;
