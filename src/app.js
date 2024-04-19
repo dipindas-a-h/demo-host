@@ -49,7 +49,7 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: "https://6621f8ec307f16ea93bd8823.sule.app",
+    origin: "*",
     // credentials:true,
   };
 
