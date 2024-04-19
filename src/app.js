@@ -49,8 +49,8 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: "*",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    origin: "https://6621f8ec307f16ea93bd8823.sule.app",
+    // credentials:true,
   };
 
 
