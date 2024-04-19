@@ -48,6 +48,11 @@ const { B2BAttractionOrder } = require("./b2b/models");
 const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes/tourPackage");
 
 const app = express();
+const corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+
 
 app.use(compression());
 app.use(express.json({ limit: "50mb" }));
@@ -57,7 +62,7 @@ app.use(
         limit: "50mb",
     })
 );
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use("/public", express.static("public"));
 app.use('/initial',configRouter)
