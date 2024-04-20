@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const mongoUrl = process.env.MONGODB_URL;
-// const mongoUrl = `mongodb://localhost:27017`;
+// const mongoUrl = process.env.MONGODB_URL;
+const mongoUrl = `mongodb://127.0.0.1:27017:27017`;
 mongoose.set("strictQuery", false);
 
 const connectMonogdb = async () => {
