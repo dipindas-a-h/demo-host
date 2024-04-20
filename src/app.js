@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const { readDataFromFile } = require("./controllers/initial/SaveDataFile");
 
-const data = readDataFromFile()
+const data = readDataFromFile();
 
 const NODE_ENV = data?.NODE_ENV === "production" ? "production" : "development";
 
@@ -50,9 +50,8 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 const app = express();
 const corsOptions = {
     origin: "*",
-    // credentials:true,
-  };
-
+    credentials: true,
+};
 
 app.use(compression());
 app.use(express.json({ limit: "50mb" }));
@@ -65,15 +64,15 @@ app.use(
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     // Exclude "Content-Type" and "Authorization" headers from the CORS preflight response
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
 app.use(cookieParser());
 app.use("/public", express.static("public"));
-app.use('/initial',configRouter)
+app.use("/initial", configRouter);
 
 app.use("/api/v1/home", homeRouter);
 app.use("/api/v1/users", usersRouter);
