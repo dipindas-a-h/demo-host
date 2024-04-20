@@ -48,10 +48,10 @@ const { B2BAttractionOrder } = require("./b2b/models");
 const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes/tourPackage");
 
 const app = express();
-// const corsOptions = {
-//     origin: "*.localhost:8000",
-// };
-app.use(cors());
+const corsOptions = {
+    origin: "http://6622535f042dbe9db267c259.localhost:8000",
+};
+app.use(cors(corsOptions));
 
 app.use(compression());
 app.use(express.json({ limit: "50mb" }));
