@@ -49,13 +49,9 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: "*",
+    origin: "http://localhost:5173",
     credentials: true,
 };
-res.setHeader(
-    "Content-Security-Policy",
-    "connect-src 'self' https://662374e80c370415328033bb.sule.app https://662385100c370415328033d3.sule.app; img-src 'self' data: https://662374e80c370415328033bb.sule.app"
-);
 
 app.use(cors(corsOptions));
 
