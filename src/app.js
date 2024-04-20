@@ -65,6 +65,7 @@ app.use(cookieParser());
 app.use("/public", express.static("public"));
 app.use(cors());
 
+console.log("test routes");
 app.get("/hello", (req, res) => {
     res.status(200).json({ message: "Server is running" });
 });
