@@ -49,8 +49,9 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5173", // Update with the actual origin of your requests
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Add the HTTP methods you want to allow
 };
 
 app.use(cors(corsOptions));
