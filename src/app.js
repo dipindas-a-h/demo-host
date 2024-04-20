@@ -51,6 +51,13 @@ const app = express();
 const corsOptions = {
     origin: "*",
 };
+app.use((req, res, next) => {
+    res.setHeader(
+        "Content-Security-Policy",
+        "connect-src 'self' https://662374e80c370415328033bb.sule.app https://662385100c370415328033d3.sule.app"
+    );
+    next();
+});
 app.use(cors(corsOptions));
 
 app.use(compression());
