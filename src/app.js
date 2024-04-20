@@ -53,8 +53,6 @@ const app = express();
 //     methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Add the HTTP methods you want to allow
 // };
 
-app.use(cors());
-
 app.use(compression());
 app.use(express.json({ limit: "50mb" }));
 app.use(
@@ -63,9 +61,14 @@ app.use(
         limit: "50mb",
     })
 );
-
 app.use(cookieParser());
 app.use("/public", express.static("public"));
+app.use(cors());
+
+app.get("/hello", (req, res) => {
+    res.status(200).json({ message: "Server is running" });
+});
+
 app.use("/initial", configRouter);
 
 app.use("/api/v1/home", homeRouter);
