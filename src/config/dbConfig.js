@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const mongoUrl = process.env.MONGODB_URL;
 // const mongoUrl = `mongodb://localhost:27017`;
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 
 const connectMonogdb = async () => {
     try {
@@ -13,6 +13,7 @@ const connectMonogdb = async () => {
         });
         console.log("MongoDB connected");
     } catch (err) {
+        console.log(err, "database error");
         throw err;
     }
 };
