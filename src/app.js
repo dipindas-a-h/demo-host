@@ -49,7 +49,7 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: "http://6622535f042dbe9db267c259.localhost:8000",
+    origin: "*.*",
 };
 app.use(cors(corsOptions));
 
