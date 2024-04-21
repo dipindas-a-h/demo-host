@@ -67,8 +67,8 @@ app.use("/public", express.static("public"));
 app.use(cors(corsOptions));
 
 console.log("test routes");
-app.get("/hello", (req, res) => {
-    res.status(200).json({ message: "Server is running" });
+app.post("/hello", (req, res) => {
+    res.status(200).json({ message: "Server is running", data: req.body });
 });
 
 app.use("/initial", configRouter);
