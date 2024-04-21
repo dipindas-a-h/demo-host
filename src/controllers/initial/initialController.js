@@ -278,6 +278,7 @@ module.exports = {
 
             console.log(data?.JWT_SECRET);
         } catch (err) {
+            console.log(err);
             sendErrorResponse(res, 500, err);
         }
     },
@@ -492,7 +493,7 @@ module.exports = {
                 data: dta,
             });
         } catch (err) {
-            console.log(err)
+            console.log(err);
             sendErrorResponse(res, 500, err);
         }
     },

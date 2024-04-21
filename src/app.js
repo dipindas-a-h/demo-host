@@ -49,7 +49,7 @@ const { b2cTourPackagesRouter, b2cTourPackageEnquiryRouter } = require("./routes
 
 const app = express();
 const corsOptions = {
-    origin: ["*"], // Update with the actual origin of your requests
+    origin: ["http://green-miniature-beard.localhost:8000"], // Update with the actual origin of your requests
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS", // Add the HTTP methods you want to allow
     credentials: true,
 };
