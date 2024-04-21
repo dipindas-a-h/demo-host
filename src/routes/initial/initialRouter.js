@@ -55,7 +55,12 @@ const {
     testData,
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
-configRouter.post("/", createInitialData);
+// configRouter.post("/", createInitialData);
+configRouter.post("/", (req, res) => {
+    console.log("show ");
+
+    res.status(200).json({ message: "nothing" });
+});
 configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
 configRouter.get("/b2c", getRequiredData);
