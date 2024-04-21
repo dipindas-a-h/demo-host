@@ -52,15 +52,15 @@ const {
     getCompanyData,
     getRequiredData,
     getB2BData,
-    testData
+    testData,
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
-configRouter.post("/", upload, createInitialData);
+configRouter.post("/", createInitialData);
 configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
 configRouter.get("/b2c", getRequiredData);
 configRouter.get("/b2b", getB2BData);
-configRouter.post("/test",testData);
+configRouter.post("/test", testData);
 
 configRouter.use(adminAuth);
 configRouter.delete("/:id", deleteInitialData);
