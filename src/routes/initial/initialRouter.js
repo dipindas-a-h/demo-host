@@ -61,7 +61,7 @@ configRouter.post("/", upload, createInitialData);
 
 //     res.status(200).json({ message: "nothing" });
 // });
-configRouter.get("/", getInitialData);
+configRouter.get("/ini", getInitialData);
 configRouter.delete("/", clearInitialData);
 configRouter.get("/b2c", getRequiredData);
 configRouter.get("/b2b", getB2BData);
