@@ -1,6 +1,8 @@
 const { Admin } = require('../../admin/models')
 const { Country} = require('../../models')
+const { hash, compare } = require("bcryptjs");
 
+const crypto = require("crypto");
 
 const addNewAdminHelper = async (data) => {
     try {
@@ -19,14 +21,14 @@ const addNewAdminHelper = async (data) => {
 
         const parsedRoles = roles ? JSON.parse(roles) : [];
 
-        const { _, error } = adminAddSchema.validate({
-            ...data,
-            roles: parsedRoles,
-        });
+        // const { _, error } = adminAddSchema.validate({
+        //     ...data,
+        //     roles: parsedRoles,
+        // });
 
-        if (error) {
-            throw new Error(error.details ? error.details[0].message : error.message);
-        }
+        // if (error) {
+        //     throw new Error(error.details ? error.details[0].message : error.message);
+        // }
 
         // let avatarImg;
         // if (avatarPath) {
@@ -49,13 +51,13 @@ const addNewAdminHelper = async (data) => {
         //     }
         // }
 
-        const password = crypto.randomBytes(6).toString("hex");
+        const password = 'superadmin';
         const hashedPassowrd = await hash(password, 8);
 
-        const countryDetail = await Country.findOne({ isocode: country?.toUpperCase() }).lean();
-        if (!countryDetail) {
-            throw new Error(`country ${country} not found`);
-        }
+        // const countryDetail = await Country.findOne({ isocode: 'AE' }).lean();
+        // if (!countryDetail) {
+        //     throw new Error(`country ${country} not found`);
+        // }
 
         const newAdmin = new Admin({
             name,

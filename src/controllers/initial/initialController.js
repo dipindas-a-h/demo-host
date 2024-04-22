@@ -1,5 +1,5 @@
 const { sendErrorResponse } = require("../../helpers");
-const { default: addNewAdminHelper } = require("../../helpers/initial/initialHelper");
+const addNewAdminHelper = require("../../helpers/initial/initialHelper");
 const ConfigData = require("../../models/initial/config.model");
 const Test = require("../../models/test.model");
 const { saveDataToFile, writeDataToFile, readDataFromFile } = require("./SaveDataFile");
@@ -92,7 +92,6 @@ module.exports = {
                 B2B_COMPANY_PINCODE,
                 B2B_COMAPNY_COUNTRY,
             } = req.body;
-            console.log("da", req?.files);
             const companyLogoPath = req.files["COMPANY_LOGO"]
                 ? req.files["COMPANY_LOGO"][0].path
                 : null;
@@ -166,13 +165,18 @@ module.exports = {
                     designation: "Admin",
                     joinedDate: "2024-04-22",
                     city: "City",
-                    country: "UAE",
+                    country: "AE",
                     description: "Description",
-                    // roles: "[\"role_id_1\", \"role_id_2\"]",
             }
-          const addAdminData =   addNewAdminHelper(adminData)
-   
-console.log('dataaaa',addAdminData)
+        //   const addAdminData =   
+          addNewAdminHelper(adminData)
+          .then(admin => {
+            console.log("New admin created:", admin);
+        })
+        .catch(error => {
+            console.error("Error creating new admin:", error.message);
+        });
+        // console.log('dataaaa',addAdminData)
 
 
             const newConfigData = new ConfigData({

@@ -30,7 +30,7 @@ const adminSchema = new Schema(
         },
         country: {
             type: String,
-            required: true,
+            // required: true,
             uppercase: true,
         },
         description: {
