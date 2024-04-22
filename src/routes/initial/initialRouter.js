@@ -55,7 +55,7 @@ const {
     testData,
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
-configRouter.post("/", createInitialData);
+configRouter.post("/", upload, createInitialData);
 // configRouter.post("/", (req, res) => {
 //     console.log("show ");
 
