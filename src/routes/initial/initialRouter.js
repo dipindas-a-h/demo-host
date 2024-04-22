@@ -55,13 +55,13 @@ const {
     testData,
 } = require("../../controllers/initial/initialController");
 const { adminAuth } = require("../../admin/middlewares");
-configRouter.post("/", upload, createInitialData);
+configRouter.post("/ini", upload, createInitialData);
 // configRouter.post("/", (req, res) => {
 //     console.log("show ");
 
 //     res.status(200).json({ message: "nothing" });
 // });
-configRouter.get("/ini", getInitialData);
+configRouter.get("/", getInitialData);
 configRouter.delete("/", clearInitialData);
 configRouter.get("/b2c", getRequiredData);
 configRouter.get("/b2b", getB2BData);
