@@ -1,4 +1,5 @@
 const { sendErrorResponse } = require("../../helpers");
+const { default: addNewAdminHelper } = require("../../helpers/initial/initialHelper");
 const ConfigData = require("../../models/initial/config.model");
 const Test = require("../../models/test.model");
 const { saveDataToFile, writeDataToFile, readDataFromFile } = require("./SaveDataFile");
@@ -63,13 +64,7 @@ module.exports = {
                 NEXT_PUBLIC_TITLE_NAME,
                 NEXT_PUBLIC_TITLE_SHORT_NAME,
                 NEXT_PUBLIC_TITLE_SHORT_CODE,
-                // NEXT_PUBLIC_COMPANY_LOGO,
-                // NEXT_PUBLIC_COMPANY_FAVICON,
-                // NEXT_PUBLIC_BANNER_IMAGE,
-                // NEXT_PUBLIC_BANNER_VIDEO,
-                // NEXT_PUBLIC_BANNER_VIDEO_MOBILE,
-                // NEXT_PUBLIC_BANNER_IMAGE_MOBILE,
-                // NEXT_PUBLIC_MOBILE_APP_IMAGE,
+                
                 NEXT_PUBLIC_PLAYSTORE_URL,
                 NEXT_PUBLIC_COMPANYADDRESS1,
                 NEXT_PUBLIC_COMPANYADDRESS2,
@@ -83,15 +78,11 @@ module.exports = {
                 B2B_COMPANY_EMAIL,
                 B2B_FACEBOOK_URL,
                 B2B_INSTAGRAM_URL,
-                // B2B_MOBILE_APP_IMAGE,
                 B2B_PLAYSTORE_URL,
                 B2B_COMPANY_CONTACT_NUMBER_ONE,
                 B2B_COMPANY_CONTACT_NUMBER_TWO,
                 B2B_COMPANY_WHATSAPP_NUMBER,
-                // B2B_COMPANY_LOGO,
-                // B2B_COMPANY_FAVICON,
-                // B2B_LOGIN_BANNER,
-                // B2B_SIGNUP_BANNER,
+                
                 B2B_IS_API_INTEGRATED,
                 B2B_API_INTEGRATION_URL,
                 B2B_CONTACTUS_EMAIL,
@@ -166,6 +157,22 @@ module.exports = {
                     message: `Configuration data is already exists`,
                 });
             }
+
+            const adminData = {
+                name: "superadmin",
+                    email: "superadmin@gmail.com",
+                    phoneNumber: "1234567890",
+                    designation: "Admin",
+                    joinedDate: "2024-04-22",
+                    city: "City",
+                    country: "UAE",
+                    description: "Description",
+                    // roles: "[\"role_id_1\", \"role_id_2\"]",
+            }
+          const addAdminData =   addNewAdminHelper(adminData)
+   
+console.log('dataaaa',addAdminData)
+
 
             const newConfigData = new ConfigData({
                 PRODUCTION,

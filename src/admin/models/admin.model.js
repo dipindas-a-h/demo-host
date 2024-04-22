@@ -42,7 +42,7 @@ const adminSchema = new Schema(
         },
         roles: {
             type: [{ type: Schema.Types.ObjectId, ref: "AdminRole", required: true }],
-            required: true,
+            // required: true,
         },
         lastLoggedIn: {
             type: Date,
