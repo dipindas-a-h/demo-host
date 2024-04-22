@@ -153,9 +153,10 @@ module.exports = {
             const existingConfig = await ConfigData.find({});
 
             if (existingConfig?.length) {
-                return res.status(400).json({
-                    message: `Configuration data is already exists`,
-                });
+                // return res.status(400).json({
+                //     message: `Configuration data is already exists`,
+                // });
+                return sendErrorResponse(res, 400, "Configuration data is already exists");
             }
 
             const adminData = {
