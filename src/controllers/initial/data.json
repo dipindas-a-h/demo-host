@@ -1,8 +1,8 @@
 {
     "JWT_SECRET": "2b53d4c4deea138f57a772b9f4d0e24a",
     "COMPANY_NAME": "test",
-    "COMPANY_LOGO": "public/images/initial/COMPANY_LOGO-1713776142341-302293405.png",
-    "FAV_IMAGE": "public/images/initial/FAV_IMAGE-1713776142357-570430854.png",
+    "COMPANY_LOGO": "public/images/initial/COMPANY_LOGO-1713777590613-570232495.png",
+    "FAV_IMAGE": "public/images/initial/FAV_IMAGE-1713777590622-428164440.png",
     "COMPANY_SHORT_NAME": "test",
     "CHECK": "1",
     "NEXT_PUBLIC_COMPANY_LOGO": null,
@@ -17,6 +17,6 @@
     "B2B_COMPANY_FAVICON": null,
     "B2B_LOGIN_BANNER": null,
     "B2B_SIGNUP_BANNER": null,
-    "_id": "6626260e9b8f54f279d4e8d0",
+    "_id": "66262bb6ddf8d19da7e43744",
     "__v": 0
 }
