@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const multer = require("multer");
 const path = require("path");
-const cors = require("cors");
+
 const {
     addNewAdmin,
     adminLogin,
@@ -57,7 +57,13 @@ const csvUpload = multer({
 });
 
 router.post("/add", adminAuth, upload.single("avatar"), addNewAdmin);
-router.post("/login",cors(), adminLogin);
+// router.post("/login", adminLogin);
+router.post("/login", (req,res)=>{       
+    console.log('call for login')
+    res.status(200).json({ message:'login success'});
+});
+
+
 // router.post("/upload-qtn-admins", adminAuth, csvUpload.single("admins"), addQtnAdminsFromCsv);
 
 router.patch("/update", adminAuth, upload.single("avatar"), updateAdminDetails);

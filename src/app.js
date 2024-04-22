@@ -64,7 +64,8 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/public", express.static("public"));
-app.use(cors(corsOptions));
+app.use(cors({ credentials: true, origin:true }));
+
 
 console.log("test routes");
 app.post("/hello", (req, res) => {
